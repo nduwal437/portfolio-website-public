@@ -1,0 +1,38 @@
+<!-- src/app/components/home/home.component.html -->
+<nav class="navbar">
+    <div class="navbar-brand">
+      <a routerLink="/" class="navbar-title">{{ name }}</a>
+    </div>
+    <ul class="navbar-links">
+      <li><a routerLink="/about">About</a></li>
+      <li><a routerLink="/projects">Projects</a></li>
+      <li><a routerLink="/contact">Contact</a></li>
+    </ul>
+  </nav>
+  
+  <div class="home-container">
+    <section class="intro">
+      <h1>{{ name }}</h1>
+      <h2>{{ title }}</h2>
+      <p>{{ introduction }}</p>
+      <a routerLink="/about" class="btn">Learn More About Me</a>
+    </section>
+  
+    <section class="projects-preview">
+      <h3>Recent Projects</h3>
+      <div class="projects-list">
+        <!-- Example of project cards, replace these with dynamic content as needed -->
+        <div class="project-card">
+          <h4>Project One</h4>
+          <p>A brief description of your project goes here.</p>
+          <a href="#" class="btn">View Project</a>
+        </div>
+        <div class="project-card">
+          <h4>Project Two</h4>
+          <p>A brief description of another project goes here.</p>
+          <a href="#" class="btn">View Project</a>
+        </div>
+      </div>
+    </section>
+  </div>
+  

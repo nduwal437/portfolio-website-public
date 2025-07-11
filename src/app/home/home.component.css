@@ -42,6 +42,34 @@ body {
     background-color: #555;
   }
   
+  .login-btn {
+    background-color: #4CAF50;
+    border-radius: 4px;
+  }
+  
+  .login-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .user-info span {
+    color: white;
+  }
+  
+  .logout-btn {
+    background-color: #f44336;
+    border-radius: 4px;
+  }
+  
+  .logout-btn:hover {
+    background-color: #d32f2f;
+  }
+  
   .home-container {
     max-width: 800px;
     margin: 0 auto;
@@ -110,4 +138,3 @@ body {
     color: #666;
     margin-bottom: 20px;
   }
-  

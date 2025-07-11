@@ -28,28 +28,63 @@
     Loading...
   </div>
 
-  <ul class="shopping-items-list" *ngIf="!isLoading">
-    <li *ngFor="let item of shoppingItems" class="shopping-item">
-      <div class="item-container">
-        <input 
-          type="checkbox" 
-          [checked]="item.is_needed" 
-          (change)="toggleItemStatus(item)" 
-          [disabled]="isLoading"
-          class="item-checkbox"
-        >
-        <span class="item-name" [class.completed]="item.is_needed">{{ item.name }}</span>
-      </div>
-      <button 
-        (click)="deleteItem(item.id)" 
-        class="delete-button"
-        [disabled]="isLoading"
-      >
-        Delete
-      </button>
-    </li>
-    <li *ngIf="shoppingItems.length === 0" class="no-items-message">
-      No items in your shopping list. Add some!
-    </li>
-  </ul>
+  <div class="shopping-sections" *ngIf="!isLoading">
+    <!-- Required Items Section -->
+    <div class="shopping-section">
+      <h3 class="section-title">Required Items</h3>
+      <ul class="shopping-items-list">
+        <li *ngFor="let item of requiredItems" class="shopping-item">
+          <div class="item-container">
+            <input 
+              type="checkbox" 
+              [checked]="false" 
+              (change)="toggleItemStatus(item)" 
+              [disabled]="isLoading"
+              class="item-checkbox"
+            >
+            <span class="item-name">{{ item.name }}</span>
+          </div>
+          <button 
+            (click)="deleteItem(item.id)" 
+            class="delete-button"
+            [disabled]="isLoading"
+          >
+            Delete
+          </button>
+        </li>
+        <li *ngIf="requiredItems.length === 0" class="no-items-message">
+          No required items. All items have been received!
+        </li>
+      </ul>
+    </div>
+
+    <!-- Received Items Section -->
+    <div class="shopping-section">
+      <h3 class="section-title">Received Items</h3>
+      <ul class="shopping-items-list">
+        <li *ngFor="let item of receivedItems" class="shopping-item">
+          <div class="item-container">
+            <input 
+              type="checkbox" 
+              [checked]="true" 
+              (change)="toggleItemStatus(item)" 
+              [disabled]="isLoading"
+              class="item-checkbox"
+            >
+            <span class="item-name completed">{{ item.name }}</span>
+          </div>
+          <button 
+            (click)="deleteItem(item.id)" 
+            class="delete-button"
+            [disabled]="isLoading"
+          >
+            Delete
+          </button>
+        </li>
+        <li *ngIf="receivedItems.length === 0" class="no-items-message">
+          No received items yet.
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

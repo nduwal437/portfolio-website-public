@@ -68,9 +68,31 @@
   margin: 20px 0;
 }
 
+.shopping-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.shopping-section {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e9ecef;
+}
+
 .shopping-items-list {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 .shopping-item {

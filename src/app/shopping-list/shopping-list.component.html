@@ -30,7 +30,16 @@
 
   <ul class="shopping-items-list" *ngIf="!isLoading">
     <li *ngFor="let item of shoppingItems" class="shopping-item">
-      <span class="item-name">{{ item.name }}</span>
+      <div class="item-container">
+        <input 
+          type="checkbox" 
+          [checked]="item.is_needed" 
+          (change)="toggleItemStatus(item)" 
+          [disabled]="isLoading"
+          class="item-checkbox"
+        >
+        <span class="item-name" [class.completed]="item.is_needed">{{ item.name }}</span>
+      </div>
       <button 
         (click)="deleteItem(item.id)" 
         class="delete-button"

@@ -74,4 +74,28 @@ export class ShoppingListComponent implements OnInit {
       }
     });
   }
+
+  toggleItemStatus(item: ShoppingItem): void {
+    this.isLoading = true;
+    this.errorMessage = '';
+    
+    // Toggle the is_needed status
+    const newStatus = !item.is_needed;
+    
+    this.shoppingListService.updateItem(item.id, { is_needed: newStatus }).subscribe({
+      next: (updatedItem) => {
+        // Update the item in the local array
+        const index = this.shoppingItems.findIndex(i => i.id === item.id);
+        if (index !== -1) {
+          this.shoppingItems[index] = { ...this.shoppingItems[index], is_needed: newStatus };
+        }
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error updating item:', error);
+        this.errorMessage = 'Failed to update item status. Please try again.';
+        this.isLoading = false;
+      }
+    });
+  }
 }

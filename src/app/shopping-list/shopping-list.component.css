@@ -81,12 +81,29 @@
   border-bottom: 1px solid #e9ecef;
 }
 
-.shopping-item:last-child {
-  border-bottom: none;
+.item-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
 }
 
 .item-name {
   font-size: 18px;
+}
+
+.item-name.completed {
+  text-decoration: line-through;
+  color: #6c757d;
+}
+
+.shopping-item:last-child {
+  border-bottom: none;
 }
 
 .delete-button {

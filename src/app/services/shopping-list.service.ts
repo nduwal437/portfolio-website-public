@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 export interface ShoppingItem {
   id: number;
   name: string;
+  is_needed?: boolean;
   created_at?: string;
   updated_at?: string;
 }
@@ -36,5 +37,12 @@ export class ShoppingListService {
    */
   deleteItem(id: number): Observable<any> {
     return this.http.delete(`${this.API_URL}/${id}`);
+  }
+
+  /**
+   * Update an item in the shopping list
+   */
+  updateItem(id: number, updates: Partial<ShoppingItem>): Observable<ShoppingItem> {
+    return this.http.put<ShoppingItem>(`${this.API_URL}/${id}`, updates);
   }
 }

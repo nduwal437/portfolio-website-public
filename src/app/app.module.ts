@@ -11,6 +11,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { SkillsComponent } from './skills/skills.component';
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 
 @NgModule({
@@ -21,7 +22,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
     ProjectsComponent,
     SkillsComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    ShoppingListComponent
   ],
   imports: [
     BrowserModule,

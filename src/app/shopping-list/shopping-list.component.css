@@ -1,0 +1,110 @@
+.shopping-list-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.shopping-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.shopping-list-title {
+  font-size: 24px;
+  margin: 0;
+}
+
+.back-button {
+  text-decoration: none;
+  padding: 8px 16px;
+  background-color: #f8f9fa;
+  color: #333;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.add-item-form {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.add-item-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px 0 0 4px;
+  font-size: 16px;
+}
+
+.add-item-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.add-item-button:hover {
+  background-color: #0069d9;
+}
+
+.add-item-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #dc3545;
+  margin-bottom: 15px;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.shopping-items-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.shopping-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.shopping-item:last-child {
+  border-bottom: none;
+}
+
+.item-name {
+  font-size: 18px;
+}
+
+.delete-button {
+  padding: 8px 12px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+.no-items-message {
+  text-align: center;
+  padding: 20px;
+  color: #6c757d;
+  font-style: italic;
+}

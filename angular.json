@@ -74,7 +74,7 @@
               ],
               "outputHashing": "all",
               "outputPath": "docs",
-              "baseHref": "/portfolio-website-public/"
+              "baseHref": "/"
             },
             "development": {
               "buildOptimizer": false,

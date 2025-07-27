@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingListService, ShoppingItem } from '../services/shopping-list.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-shopping-list',
@@ -20,6 +21,14 @@ export class ShoppingListComponent implements OnInit {
     this.loadItems();
   }
 
+  // Conditional logging method that won't trigger debugger pauses
+  private logError(message: string, error?: any): void {
+    if (!environment.production) {
+      // Use console.warn instead of console.error to avoid debugger pauses
+      console.warn(message, error);
+    }
+  }
+
   loadItems(): void {
     this.isLoading = true;
     this.errorMessage = '';
@@ -31,7 +40,7 @@ export class ShoppingListComponent implements OnInit {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error fetching shopping items:', error);
+        this.logError('Error fetching shopping items:', error);
         this.errorMessage = 'Failed to load shopping items. Please try again.';
         this.isLoading = false;
       }
@@ -68,7 +77,7 @@ export class ShoppingListComponent implements OnInit {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error adding item:', error);
+        this.logError('Error adding item:', error);
         this.errorMessage = 'Failed to add item. Please try again.';
         this.isLoading = false;
       }
@@ -86,7 +95,7 @@ export class ShoppingListComponent implements OnInit {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error deleting item:', error);
+        this.logError('Error deleting item:', error);
         this.errorMessage = 'Failed to delete item. Please try again.';
         this.isLoading = false;
       }
@@ -111,7 +120,7 @@ export class ShoppingListComponent implements OnInit {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error updating item:', error);
+        this.logError('Error updating item:', error);
         this.errorMessage = 'Failed to update item status. Please try again.';
         this.isLoading = false;
       }

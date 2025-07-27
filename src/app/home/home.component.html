@@ -3,12 +3,17 @@
     <div class="navbar-brand">
       <a routerLink="/" class="navbar-title">{{ name }}</a>
     </div>
-    <ul class="navbar-links">
-      <li><a routerLink="/about">About</a></li>
-      <li><a routerLink="/projects">Projects</a></li>
-      <li><a routerLink="/contact">Contact</a></li>
-      <li *ngIf="isLoggedIn"><a routerLink="/shopping-list" class="shopping-list-btn">Shopping List</a></li>
-      <li *ngIf="!isLoggedIn"><a routerLink="/login" class="login-btn">Login</a></li>
+    <div class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+      <span class="hamburger-line" [class.active]="isMobileMenuOpen"></span>
+      <span class="hamburger-line" [class.active]="isMobileMenuOpen"></span>
+      <span class="hamburger-line" [class.active]="isMobileMenuOpen"></span>
+    </div>
+    <ul class="navbar-links" [class.mobile-open]="isMobileMenuOpen">
+      <li><a routerLink="/about" (click)="closeMobileMenu()">About</a></li>
+      <li><a routerLink="/projects" (click)="closeMobileMenu()">Projects</a></li>
+      <li><a routerLink="/contact" (click)="closeMobileMenu()">Contact</a></li>
+      <li *ngIf="isLoggedIn"><a routerLink="/shopping-list" class="shopping-list-btn" (click)="closeMobileMenu()">Shopping List</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/login" class="login-btn" (click)="closeMobileMenu()">Login</a></li>
       <li *ngIf="isLoggedIn" class="user-info">
         <span>Welcome, {{ loggedInUser }}</span>
         <a href="javascript:void(0)" (click)="onLogout()" class="logout-btn">Logout</a>

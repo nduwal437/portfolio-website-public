@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   introduction: string = 'Welcome to my portfolio! I specialize in building modern web applications.';
   isLoggedIn: boolean = false;
   loggedInUser: string = '';
+  isMobileMenuOpen: boolean = false;
 
   constructor(private authService: AuthService) { }
 
@@ -27,5 +28,14 @@ export class HomeComponent implements OnInit {
 
   onLogout(): void {
     this.authService.logout();
+    this.closeMobileMenu();
+  }
+
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  closeMobileMenu(): void {
+    this.isMobileMenuOpen = false;
   }
 }

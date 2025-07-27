@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,14 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  // Conditional logging method that won't trigger debugger pauses
+  private logError(message: string, error?: any): void {
+    if (!environment.production) {
+      // Use console.warn instead of console.error to avoid debugger pauses
+      console.warn(message, error);
+    }
   }
 
   onLogin(): void {
@@ -41,7 +50,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.errorMessage = 'Login failed. Please try again later.';
         }
-        console.error('Login error:', error);
+        this.logError('Login error:', error);
       }
     });
   }

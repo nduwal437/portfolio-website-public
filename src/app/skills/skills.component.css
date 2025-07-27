@@ -1,0 +1,155 @@
+/* Skills Component Styles */
+.skills-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.skills-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.skills-header h1 {
+  font-size: 32px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.skills-header p {
+  font-size: 16px;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.skills-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.skill-category {
+  background: white;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.category-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f4f4f4;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.skill-item {
+  background-color: #f8f9fa;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #333;
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+.skill-item:hover {
+  background-color: #e9ecef;
+  transform: translateY(-2px);
+}
+
+.skill-item.advanced {
+  background-color: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+}
+
+.skill-item.intermediate {
+  background-color: #fff3cd;
+  color: #856404;
+  border-color: #ffeaa7;
+}
+
+.skill-item.beginner {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-color: #f5c6cb;
+}
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+  .skills-container {
+    padding: 30px 15px;
+  }
+
+  .skills-header h1 {
+    font-size: 28px;
+  }
+
+  .skills-header p {
+    font-size: 15px;
+  }
+
+  .skills-categories {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .skill-category {
+    padding: 20px;
+  }
+
+  .category-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+
+  .skills-list {
+    gap: 8px;
+  }
+
+  .skill-item {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .skills-container {
+    padding: 20px 10px;
+  }
+
+  .skills-header h1 {
+    font-size: 24px;
+  }
+
+  .skills-header p {
+    font-size: 14px;
+  }
+
+  .skill-category {
+    padding: 15px;
+  }
+
+  .category-title {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .skills-list {
+    gap: 6px;
+  }
+
+  .skill-item {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}

@@ -147,3 +147,132 @@
   color: #6c757d;
   font-style: italic;
 }
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+  .shopping-list-container {
+    padding: 15px;
+  }
+
+  .shopping-list-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .shopping-list-title {
+    font-size: 22px;
+  }
+
+  .back-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .add-item-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .add-item-input {
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .add-item-button {
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .shopping-sections {
+    gap: 20px;
+  }
+
+  .shopping-section {
+    padding: 12px;
+  }
+
+  .section-title {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .shopping-item {
+    padding: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .item-container {
+    width: 100%;
+  }
+
+  .item-name {
+    font-size: 16px;
+  }
+
+  .delete-button {
+    align-self: flex-end;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .shopping-list-container {
+    padding: 10px;
+  }
+
+  .shopping-list-title {
+    font-size: 20px;
+  }
+
+  .back-button {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .add-item-input {
+    font-size: 13px;
+    padding: 6px;
+  }
+
+  .add-item-button {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .shopping-section {
+    padding: 10px;
+  }
+
+  .section-title {
+    font-size: 15px;
+  }
+
+  .shopping-item {
+    padding: 10px;
+  }
+
+  .item-name {
+    font-size: 15px;
+  }
+
+  .item-checkbox {
+    width: 16px;
+    height: 16px;
+  }
+
+  .delete-button {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+
+  .no-items-message {
+    padding: 15px;
+    font-size: 14px;
+  }
+}

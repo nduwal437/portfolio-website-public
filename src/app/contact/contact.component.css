@@ -1,86 +1,8 @@
-/* Contact Component Styles */
+/* Contact Component Specific Styles */
 .contact-container {
   max-width: 600px;
   margin: 0 auto;
   padding: 40px 20px;
-}
-
-.contact-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.contact-header h1 {
-  font-size: 32px;
-  margin-bottom: 15px;
-  color: #333;
-}
-
-.contact-header p {
-  font-size: 16px;
-  color: #666;
-  line-height: 1.6;
-}
-
-.contact-form {
-  background: white;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: 500;
-  color: #333;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  font-family: inherit;
-  transition: border-color 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: #4CAF50;
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-.submit-btn {
-  width: 100%;
-  padding: 12px;
-  background-color: #333;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.submit-btn:hover {
-  background-color: #555;
-}
-
-.submit-btn:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
 }
 
 .contact-info {
@@ -138,29 +60,6 @@
     padding: 30px 15px;
   }
 
-  .contact-header h1 {
-    font-size: 28px;
-  }
-
-  .contact-header p {
-    font-size: 15px;
-  }
-
-  .contact-form {
-    padding: 20px;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    padding: 10px;
-    font-size: 13px;
-  }
-
-  .submit-btn {
-    padding: 12px;
-    font-size: 15px;
-  }
-
   .contact-info h3 {
     font-size: 18px;
   }
@@ -185,33 +84,6 @@
 @media screen and (max-width: 480px) {
   .contact-container {
     padding: 20px 10px;
-  }
-
-  .contact-header h1 {
-    font-size: 24px;
-  }
-
-  .contact-header p {
-    font-size: 14px;
-  }
-
-  .contact-form {
-    padding: 15px;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    padding: 8px;
-    font-size: 12px;
-  }
-
-  .form-group textarea {
-    min-height: 100px;
-  }
-
-  .submit-btn {
-    padding: 10px;
-    font-size: 14px;
   }
 
   .contact-info h3 {

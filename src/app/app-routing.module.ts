@@ -7,6 +7,7 @@ import { SkillsComponent } from './skills/skills.component';
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,7 +16,12 @@ const routes: Routes = [
   { path: 'skills', component: SkillsComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'shopping-list', component: ShoppingListComponent }
+  { 
+    path: 'shopping-list', 
+    component: ShoppingListComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: '**', redirectTo: '' } // Wildcard route - must be last
 ];
 
 @NgModule({

@@ -1,1 +1,122 @@
-<p>about works!</p>
+<div class="about-container">
+  <!-- Hero Section -->
+  <section class="about-hero">
+    <div class="hero-content">
+      <h1 class="page-title">About Me</h1>
+      <p class="page-subtitle">Get to know more about my journey, skills, and passion for development</p>
+    </div>
+  </section>
+
+  <!-- Personal Summary -->
+  <section class="personal-summary">
+    <div class="summary-card">
+      <h2 class="section-title">Who I Am</h2>
+      <p class="summary-text">{{ personalInfo.summary }}</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <strong>Email:</strong> {{ personalInfo.email }}
+        </div>
+        <div class="contact-item">
+          <strong>Location:</strong> {{ personalInfo.location }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="skills-section">
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="skills-categories">
+      <div class="skill-category">
+        <h3 class="category-title">Frontend</h3>
+        <div class="skill-tags">
+          <span *ngFor="let skill of skills.frontend" class="skill-tag frontend">{{ skill }}</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3 class="category-title">Backend</h3>
+        <div class="skill-tags">
+          <span *ngFor="let skill of skills.backend" class="skill-tag backend">{{ skill }}</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3 class="category-title">Database</h3>
+        <div class="skill-tags">
+          <span *ngFor="let skill of skills.database" class="skill-tag database">{{ skill }}</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3 class="category-title">Tools & Others</h3>
+        <div class="skill-tags">
+          <span *ngFor="let skill of skills.tools" class="skill-tag tools">{{ skill }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section class="experience-section">
+    <h2 class="section-title">Professional Experience</h2>
+    <div class="timeline">
+      <div 
+        *ngFor="let exp of experiences; trackBy: trackByExperienceId" 
+        class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <div class="experience-header">
+            <h3 class="job-title">{{ exp.title }}</h3>
+            <span class="company">{{ exp.company }}</span>
+            <span class="period">{{ exp.period }}</span>
+          </div>
+          <p class="job-description">{{ exp.description }}</p>
+          <div class="job-technologies">
+            <span 
+              *ngFor="let tech of exp.technologies" 
+              class="tech-tag">
+              {{ tech }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section class="education-section">
+    <h2 class="section-title">Education</h2>
+    <div class="education-list">
+      <div 
+        *ngFor="let edu of education; trackBy: trackByEducationId" 
+        class="education-item">
+        <h3 class="degree-title">{{ edu.degree }}</h3>
+        <div class="institution">{{ edu.institution }}</div>
+        <div class="education-period">{{ edu.period }}</div>
+        <p *ngIf="edu.description" class="education-description">{{ edu.description }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interests Section -->
+  <section class="interests-section">
+    <h2 class="section-title">Interests & Hobbies</h2>
+    <div class="interests-grid">
+      <div 
+        *ngFor="let interest of interests" 
+        class="interest-item">
+        {{ interest }}
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2>Let's Work Together</h2>
+      <p>I'm always interested in new opportunities and exciting projects.</p>
+      <div class="cta-actions">
+        <a routerLink="/contact" class="btn btn-primary">Get In Touch</a>
+        <a routerLink="/projects" class="btn btn-secondary">View My Work</a>
+      </div>
+    </div>
+  </section>
+</div>

@@ -25,7 +25,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    enableTracing: false, // Set to true for debugging
+    scrollPositionRestoration: 'top',
+    anchorScrolling: 'enabled',
+    onSameUrlNavigation: 'reload',
+    preloadingStrategy: 'NoPreloading' // Change to PreloadAllModules for better performance
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

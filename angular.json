@@ -53,6 +53,29 @@
               ],
               "outputHashing": "all"
             },
+            "github-pages": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kb",
+                  "maximumError": "8kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all",
+              "outputPath": "docs",
+              "baseHref": "/portfolio-website-public/"
+            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,

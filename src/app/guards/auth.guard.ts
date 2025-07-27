@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanActivateChild, Router } from '@angular/router';
+import { CanActivate, CanActivateChild, Router, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
@@ -12,15 +13,15 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     private router: Router
   ) {}
 
-  canActivate(): boolean {
+  canActivate(): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     return this.checkAuth();
   }
 
-  canActivateChild(): boolean {
+  canActivateChild(): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     return this.checkAuth();
   }
 
-  private checkAuth(): boolean {
+  private checkAuth(): boolean | UrlTree {
     // Check if user has a valid session
     if (this.authService.isSessionValid()) {
       // Update activity when accessing protected routes
@@ -28,9 +29,16 @@ export class AuthGuard implements CanActivate, CanActivateChild {
       return true;
     }
 
-    // If session is invalid, logout and redirect to home
-    console.warn('Access denied: Invalid or expired session');
-    this.authService.logout();
-    return false;
+    // If session is invalid, clear any invalid tokens and redirect to home
+    console.warn('Access denied: Invalid or expired session - redirecting to home');
+    
+    // Clear invalid session data
+    if (this.authService.getToken()) {
+      this.authService.logout();
+    }
+    
+    // Return UrlTree for redirect instead of calling router.navigate
+    // This is the recommended approach in modern Angular
+    return this.router.createUrlTree(['/']);
   }
 }

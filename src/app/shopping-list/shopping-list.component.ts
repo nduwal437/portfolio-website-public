@@ -43,6 +43,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   receivedItems: ShoppingItem[] = [];
   newItemName = '';
   searchTerm = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
   errorMessage = '';
 
   // Per-item loading states (replaces global isLoading)
@@ -156,8 +157,16 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     const filtered = term
       ? this.shoppingItems.filter(item => item.name.toLowerCase().includes(term))
       : this.shoppingItems;
-    this.requiredItems = filtered.filter(item => item.is_needed);
-    this.receivedItems = filtered.filter(item => !item.is_needed);
+    const sortMultiplier = this.sortDirection === 'asc' ? 1 : -1;
+    const sortFn = (a: ShoppingItem, b: ShoppingItem) =>
+      sortMultiplier * a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
+    this.requiredItems = filtered.filter(item => item.is_needed).sort(sortFn);
+    this.receivedItems = filtered.filter(item => !item.is_needed).sort(sortFn);
+  }
+
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.separateItems();
   }
 
   onSearchChange(): void {

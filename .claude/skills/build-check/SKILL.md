@@ -44,5 +44,5 @@ Verify the production build for GitHub Pages deployment.
 ## Project Context
 - Deployment: GitHub Pages served from `docs/` on main branch. CI builds and commits `docs/` directly.
 - Build output: `docs/` directory
-- Custom domain: www.nikeshduwal.com.np (CNAME in `src/assets/`)
+- Custom domain: www.nikeshduwal.com.np (CNAME in `docs/`)
 - CI pipeline: `.github/workflows/ci.yml` (lint → build → test → deploy via commit to main)

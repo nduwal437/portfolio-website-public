@@ -30,22 +30,33 @@
     </button>
   </form>
 
-  <!-- Search bar (only visible when items exist) -->
-  <div class="search-bar" *ngIf="!isInitialLoading && shoppingItems.length > 0">
-    <input
-      type="text"
-      [(ngModel)]="searchTerm"
-      (ngModelChange)="onSearchChange()"
-      placeholder="Search items..."
-      class="search-input"
-      (keydown.escape)="clearSearch()"
-    />
+  <!-- Search bar and sort (only visible when items exist) -->
+  <div class="search-sort-row" *ngIf="!isInitialLoading && shoppingItems.length > 0">
+    <div class="search-bar">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="onSearchChange()"
+        placeholder="Search items..."
+        class="search-input"
+        (keydown.escape)="clearSearch()"
+      />
+      <button
+        *ngIf="searchTerm"
+        class="search-clear-button"
+        (click)="clearSearch()"
+        aria-label="Clear search"
+      >&times;</button>
+    </div>
     <button
-      *ngIf="searchTerm"
-      class="search-clear-button"
-      (click)="clearSearch()"
-      aria-label="Clear search"
-    >&times;</button>
+      class="sort-button"
+      (click)="toggleSortDirection()"
+      [attr.aria-label]="'Sort ' + (sortDirection === 'asc' ? 'descending' : 'ascending')"
+      [title]="'Sorted A\u2013Z (' + (sortDirection === 'asc' ? 'ascending' : 'descending') + ')'"
+    >
+      <span class="sort-icon" [class.sort-desc]="sortDirection === 'desc'">&#8593;</span>
+      <span class="sort-label">{{ sortDirection === 'asc' ? 'A\u2013Z' : 'Z\u2013A' }}</span>
+    </button>
   </div>
 
   <!-- No search results -->

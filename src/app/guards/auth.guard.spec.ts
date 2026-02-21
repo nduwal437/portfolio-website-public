@@ -10,7 +10,10 @@ describe('AuthGuard', () => {
 
   beforeEach(() => {
     const authServiceSpy = jasmine.createSpyObj('AuthService', [
-      'isSessionValid', 'updateActivity', 'getToken', 'logout'
+      'isSessionValid',
+      'updateActivity',
+      'getToken',
+      'logout'
     ]);
     const routerSpy = jasmine.createSpyObj('Router', ['navigate', 'createUrlTree']);
 

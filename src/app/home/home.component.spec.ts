@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+
 import { HomeComponent } from './home.component';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
@@ -14,20 +14,15 @@ describe('HomeComponent', () => {
   let router: Router;
 
   beforeEach(async () => {
-    const authServiceSpy = jasmine.createSpyObj('AuthService', [
-      'logout', 'isLoggedIn', 'getCurrentUser'
-    ], {
+    const authServiceSpy = jasmine.createSpyObj('AuthService', ['logout', 'isLoggedIn', 'getCurrentUser'], {
       isLoggedIn$: of(false)
     });
 
     await TestBed.configureTestingModule({
-      declarations: [ HomeComponent ],
-      imports: [ RouterTestingModule.withRoutes([]) ],
-      providers: [
-        { provide: AuthService, useValue: authServiceSpy }
-      ]
-    })
-    .compileComponents();
+      declarations: [HomeComponent],
+      imports: [RouterTestingModule.withRoutes([])],
+      providers: [{ provide: AuthService, useValue: authServiceSpy }]
+    }).compileComponents();
 
     authService = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
     router = TestBed.inject(Router);
@@ -51,10 +46,10 @@ describe('HomeComponent', () => {
 
   it('should toggle mobile menu', () => {
     expect(component.isMobileMenuOpen).toBeFalse();
-    
+
     component.toggleMobileMenu();
     expect(component.isMobileMenuOpen).toBeTrue();
-    
+
     component.toggleMobileMenu();
     expect(component.isMobileMenuOpen).toBeFalse();
   });
@@ -68,7 +63,7 @@ describe('HomeComponent', () => {
   it('should display login button when not logged in', () => {
     component.isLoggedIn = false;
     fixture.detectChanges();
-    
+
     const loginBtn = fixture.debugElement.query(By.css('.login-btn'));
     expect(loginBtn).toBeTruthy();
     expect(loginBtn.nativeElement.textContent.trim()).toBe('Login');
@@ -78,10 +73,10 @@ describe('HomeComponent', () => {
     component.isLoggedIn = true;
     component.loggedInUser = 'test@example.com';
     fixture.detectChanges();
-    
+
     const logoutBtn = fixture.debugElement.query(By.css('.logout-btn'));
     const userInfo = fixture.debugElement.query(By.css('.user-info'));
-    
+
     expect(logoutBtn).toBeTruthy();
     expect(userInfo).toBeTruthy();
     expect(userInfo.nativeElement.textContent).toContain('Welcome, test@example.com');
@@ -90,7 +85,7 @@ describe('HomeComponent', () => {
   it('should show shopping list link when logged in', () => {
     component.isLoggedIn = true;
     fixture.detectChanges();
-    
+
     const shoppingListBtn = fixture.debugElement.query(By.css('.shopping-list-btn'));
     expect(shoppingListBtn).toBeTruthy();
   });
@@ -98,7 +93,7 @@ describe('HomeComponent', () => {
   it('should hide shopping list link when not logged in', () => {
     component.isLoggedIn = false;
     fixture.detectChanges();
-    
+
     const shoppingListBtn = fixture.debugElement.query(By.css('.shopping-list-btn'));
     expect(shoppingListBtn).toBeFalsy();
   });
@@ -106,16 +101,16 @@ describe('HomeComponent', () => {
   it('should call logout on auth service when logout clicked', () => {
     component.isLoggedIn = true;
     component.onLogout();
-    
+
     expect(authService.logout).toHaveBeenCalled();
   });
 
   it('should navigate to correct routes when nav links are clicked', () => {
     spyOn(router, 'navigate');
-    
+
     const aboutLink = fixture.debugElement.query(By.css('a[routerLink="/about"]'));
     const projectsLink = fixture.debugElement.query(By.css('a[routerLink="/projects"]'));
-    
+
     expect(aboutLink).toBeTruthy();
     expect(projectsLink).toBeTruthy();
   });
@@ -123,10 +118,10 @@ describe('HomeComponent', () => {
   it('should display hero action buttons', () => {
     const learnMoreBtn = fixture.debugElement.query(By.css('a[routerLink="/about"].btn-primary'));
     const viewWorkBtn = fixture.debugElement.query(By.css('a[routerLink="/projects"].btn-secondary'));
-    
+
     expect(learnMoreBtn).toBeTruthy();
     expect(learnMoreBtn.nativeElement.textContent.trim()).toBe('Learn More About Me');
-    
+
     expect(viewWorkBtn).toBeTruthy();
     expect(viewWorkBtn.nativeElement.textContent.trim()).toBe('View My Work');
   });
@@ -134,18 +129,18 @@ describe('HomeComponent', () => {
   it('should have correct ARIA attributes for accessibility', () => {
     const mobileMenuToggle = fixture.debugElement.query(By.css('.mobile-menu-toggle'));
     const navbar = fixture.debugElement.query(By.css('nav'));
-    
+
     expect(mobileMenuToggle.nativeElement.getAttribute('aria-expanded')).toBe('false');
     expect(navbar.nativeElement.getAttribute('role')).toBe('navigation');
   });
 
   it('should close mobile menu when screen size changes to desktop', () => {
     component.isMobileMenuOpen = true;
-    
+
     // Simulate window resize to desktop size
     spyOnProperty(window, 'innerWidth').and.returnValue(1024);
     component.onWindowResize();
-    
+
     expect(component.isMobileMenuOpen).toBeFalse();
   });
 });

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../services/auth.service';
@@ -9,18 +9,15 @@ import { environment } from '../../environments/environment';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
-  email: string = '';
-  password: string = '';
-  errorMessage: string = '';
-  isLoading: boolean = false;
+export class LoginComponent implements OnDestroy {
+  email = '';
+  password = '';
+  errorMessage = '';
+  isLoading = false;
 
   private readonly destroy$ = new Subject<void>();
 
-  constructor(private router: Router, private authService: AuthService) { }
-
-  ngOnInit(): void {
-  }
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -28,6 +25,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   // Conditional logging method that won't trigger debugger pauses
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private logError(message: string, error?: any): void {
     if (!environment.production) {
       // Use console.warn instead of console.error to avoid debugger pauses
@@ -46,20 +44,23 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.errorMessage = '';
 
     // Call the authentication service
-    this.authService.login(this.email, this.password).pipe(takeUntil(this.destroy$)).subscribe({
-      next: () => {
-        this.isLoading = false;
-        this.router.navigate(['/']);
-      },
-      error: (error) => {
-        this.isLoading = false;
-        if (error.status === 401) {
-          this.errorMessage = 'Invalid email or password';
-        } else {
-          this.errorMessage = 'Login failed. Please try again later.';
+    this.authService
+      .login(this.email, this.password)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.router.navigate(['/']);
+        },
+        error: error => {
+          this.isLoading = false;
+          if (error.status === 401) {
+            this.errorMessage = 'Invalid email or password';
+          } else {
+            this.errorMessage = 'Login failed. Please try again later.';
+          }
+          this.logError('Login error:', error);
         }
-        this.logError('Login error:', error);
-      }
-    });
+      });
   }
 }

@@ -10,10 +10,9 @@ describe('ContactComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContactComponent ],
-      imports: [ FormsModule ]
-    })
-    .compileComponents();
+      declarations: [ContactComponent],
+      imports: [FormsModule]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -54,13 +53,13 @@ describe('ContactComponent', () => {
     // Fill out form with valid data
     nameInput.nativeElement.value = 'John Doe';
     nameInput.nativeElement.dispatchEvent(new Event('input'));
-    
+
     emailInput.nativeElement.value = 'john@example.com';
     emailInput.nativeElement.dispatchEvent(new Event('input'));
-    
+
     subjectInput.nativeElement.value = 'Test Subject';
     subjectInput.nativeElement.dispatchEvent(new Event('input'));
-    
+
     messageTextarea.nativeElement.value = 'Test message content';
     messageTextarea.nativeElement.dispatchEvent(new Event('input'));
 

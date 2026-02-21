@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Experience, Education } from '../models';
 
 @Component({
@@ -7,8 +7,7 @@ import { Experience, Education } from '../models';
   styleUrls: ['./about.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AboutComponent implements OnInit {
-
+export class AboutComponent {
   readonly personalInfo = {
     name: 'Nikesh Duwal',
     title: 'Full Stack Developer',
@@ -34,7 +33,8 @@ export class AboutComponent implements OnInit {
       title: 'Senior Full Stack Developer',
       company: 'Test Company',
       period: '2022 - Present',
-      description: 'Led development of enterprise web applications using Angular and Node.js. Implemented microservices architecture and improved application performance by 40%.',
+      description:
+        'Led development of enterprise web applications using Angular and Node.js. Implemented microservices architecture and improved application performance by 40%.',
       technologies: ['Angular', 'Node.js', 'MongoDB', 'Docker', 'AWS']
     },
     {
@@ -42,7 +42,8 @@ export class AboutComponent implements OnInit {
       title: 'Frontend Developer',
       company: 'Test Company 2',
       period: '2021 - 2022',
-      description: 'Developed responsive web applications and collaborated with UI/UX designers to create engaging user experiences. Mentored junior developers and established coding standards.',
+      description:
+        'Developed responsive web applications and collaborated with UI/UX designers to create engaging user experiences. Mentored junior developers and established coding standards.',
       technologies: ['React', 'TypeScript', 'SASS', 'Redux', 'Jest']
     },
     {
@@ -50,7 +51,8 @@ export class AboutComponent implements OnInit {
       title: 'Junior Developer',
       company: 'Test Company 3',
       period: '2020 - 2021',
-      description: 'Started my journey as a developer, working on various projects and learning modern web development technologies. Contributed to both frontend and backend development.',
+      description:
+        'Started my journey as a developer, working on various projects and learning modern web development technologies. Contributed to both frontend and backend development.',
       technologies: ['JavaScript', 'HTML/CSS', 'Express.js', 'MySQL']
     }
   ];
@@ -74,11 +76,6 @@ export class AboutComponent implements OnInit {
     'Hiking'
   ];
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
   trackByExperienceId(index: number, experience: Experience): number {
     return experience.id;
   }
@@ -86,5 +83,4 @@ export class AboutComponent implements OnInit {
   trackByEducationId(index: number, education: Education): number {
     return education.id;
   }
-
 }

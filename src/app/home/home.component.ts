@@ -15,8 +15,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   // Personal information
   readonly name: string = 'Nikesh Duwal';
   readonly title: string = 'Full Stack Developer';
-  readonly introduction: string = 'Passionate about creating innovative web solutions with modern technologies. I build scalable, user-friendly applications that make a difference.';
-  
+  readonly introduction: string =
+    'Passionate about creating innovative web solutions with modern technologies. I build scalable, user-friendly applications that make a difference.';
+
   // Authentication state
   isLoggedIn = false;
   loggedInUser = '';
@@ -34,7 +35,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     {
       id: 1,
       title: 'E-Commerce Platform',
-      description: 'A modern e-commerce solution built with Angular and Node.js, featuring real-time inventory management and secure payment processing.',
+      description:
+        'A modern e-commerce solution built with Angular and Node.js, featuring real-time inventory management and secure payment processing.',
       technologies: ['Angular', 'Node.js', 'MongoDB', 'Stripe'],
       status: 'completed',
       link: '#'
@@ -42,24 +44,27 @@ export class HomeComponent implements OnInit, OnDestroy {
     {
       id: 2,
       title: 'Task Management App',
-      description: 'A collaborative task management application with real-time updates, file sharing, and team collaboration features.',
+      description:
+        'A collaborative task management application with real-time updates, file sharing, and team collaboration features.',
       technologies: ['React', 'Express', 'Socket.io', 'PostgreSQL'],
       status: 'in-progress'
     },
     {
       id: 3,
       title: 'AI-Powered Analytics Dashboard',
-      description: 'An intelligent analytics platform that provides actionable insights using machine learning algorithms.',
+      description:
+        'An intelligent analytics platform that provides actionable insights using machine learning algorithms.',
       technologies: ['Vue.js', 'Python', 'TensorFlow', 'Docker'],
       status: 'planned'
     }
   ];
 
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService) {}
 
   ngOnInit(): void {
     // Subscribe to the authentication state with proper cleanup
-    this.authService.isLoggedIn()
+    this.authService
+      .isLoggedIn()
       .pipe(takeUntil(this.destroy$))
       .subscribe(loggedIn => {
         this.isLoggedIn = loggedIn;
@@ -80,7 +85,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     const target = event.target as HTMLElement;
     const mobileToggle = target.closest('.mobile-menu-toggle');
     const navbarLinks = target.closest('.navbar-links');
-    
+
     if (!mobileToggle && !navbarLinks && this.isMobileMenuOpen) {
       this.closeMobileMenu();
     }
@@ -108,7 +113,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
-    
+
     // Prevent body scroll when menu is open (accessibility)
     if (this.isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -124,9 +129,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getStatusClass(status: ProjectPreview['status']): string {
     const statusClasses = {
-      'completed': 'status-completed',
+      completed: 'status-completed',
       'in-progress': 'status-in-progress',
-      'planned': 'status-planned'
+      planned: 'status-planned'
     };
     return statusClasses[status];
   }

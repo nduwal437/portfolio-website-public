@@ -7,17 +7,17 @@
   <form class="form-container" #contactForm="ngForm">
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" id="name" name="name" required ngModel>
+      <input type="text" id="name" name="name" required ngModel />
     </div>
 
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="email" id="email" name="email" required ngModel>
+      <input type="email" id="email" name="email" required ngModel />
     </div>
 
     <div class="form-group">
       <label for="subject">Subject</label>
-      <input type="text" id="subject" name="subject" required ngModel>
+      <input type="text" id="subject" name="subject" required ngModel />
     </div>
 
     <div class="form-group">
@@ -25,9 +25,6 @@
       <textarea id="message" name="message" required ngModel></textarea>
     </div>
 
-    <button type="submit" class="btn btn-primary btn-full-width" [disabled]="!contactForm.valid">
-      Send Message
-    </button>
+    <button type="submit" class="btn btn-primary btn-full-width" [disabled]="!contactForm.valid">Send Message</button>
   </form>
-
 </div>

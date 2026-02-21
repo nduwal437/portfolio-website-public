@@ -1,144 +1,148 @@
 <!-- src/app/components/home/home.component.html -->
 <nav class="navbar" role="navigation" aria-label="Main navigation">
-    <div class="navbar-brand">
-      <a routerLink="/" class="navbar-title" aria-label="Home">{{ name }}</a>
-    </div>
-    <button 
-      class="mobile-menu-toggle" 
-      (click)="toggleMobileMenu()"
-      [attr.aria-expanded]="isMobileMenuOpen"
-      [attr.aria-label]="isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'"
-      type="button">
-      <span class="hamburger-line" [class.active]="isMobileMenuOpen" aria-hidden="true"></span>
-      <span class="hamburger-line" [class.active]="isMobileMenuOpen" aria-hidden="true"></span>
-      <span class="hamburger-line" [class.active]="isMobileMenuOpen" aria-hidden="true"></span>
-    </button>
-    <ul class="navbar-links" [class.mobile-open]="isMobileMenuOpen" role="menubar">
-      <li role="none"><a routerLink="/about" (click)="closeMobileMenu()" role="menuitem">About</a></li>
-      <li role="none"><a routerLink="/projects" (click)="closeMobileMenu()" role="menuitem">Projects</a></li>
-      <li role="none"><a routerLink="/contact" (click)="closeMobileMenu()" role="menuitem">Contact</a></li>
-      <li role="none" *ngIf="isLoggedIn"><a routerLink="/shopping-list" class="shopping-list-btn" (click)="closeMobileMenu()" role="menuitem">Shopping List</a></li>
-      <li role="none" *ngIf="!isLoggedIn"><a routerLink="/login" class="login-btn" (click)="closeMobileMenu()" role="menuitem">Login</a></li>
-      <li role="none" *ngIf="isLoggedIn" class="user-info">
-        <span>Welcome, {{ loggedInUser }}</span>
-        <button (click)="onLogout()" class="logout-btn" type="button" role="menuitem">Logout</button>
-      </li>
-    </ul>
-  </nav>
-  
-  <div class="home-container">
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <div class="hero-content">
-        <div class="hero-text">
-          <h1 class="hero-title">{{ name }}</h1>
-          <h2 class="hero-subtitle">{{ title }}</h2>
-          <p class="hero-description">{{ introduction }}</p>
-          <div class="hero-actions">
-            <a routerLink="/about" class="btn btn-primary">Learn More About Me</a>
-            <a routerLink="/projects" class="btn btn-secondary">View My Work</a>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <div class="profile-card">
-            <div class="profile-avatar">
-              <div class="avatar-placeholder">{{ name.charAt(0) }}</div>
-            </div>
-            <div class="status-indicator">
-              <span class="status-dot"></span>
-              <span class="status-text">Available for hire</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills Preview Section -->
-    <section class="skills-preview">
-      <h3 class="section-title">Core Technologies</h3>
-      <div class="skills-grid">
-        <div 
-          *ngFor="let skill of featuredSkills; trackBy: trackBySkillName" 
-          class="skill-item"
-          [attr.data-category]="skill.category">
-          <div class="skill-info">
-            <span class="skill-name">{{ skill.name }}</span>
-            <span class="skill-level">{{ skill.level }}%</span>
-          </div>
-          <div class="skill-progress">
-            <div 
-              class="skill-progress-fill" 
-              [style.width]="getSkillWidth(skill.level)"
-              [attr.data-level]="skill.level">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  
-    <!-- Projects Preview Section -->
-    <section class="projects-preview">
-      <h3 class="section-title">Featured Projects</h3>
-      <div class="projects-grid">
-        <div 
-          *ngFor="let project of projectPreviews; trackBy: trackByProjectId" 
-          class="project-card"
-          [attr.data-status]="project.status">
-          <div class="project-header">
-            <h4 class="project-title">{{ project.title }}</h4>
-            <span class="project-status" [ngClass]="getStatusClass(project.status)">
-              {{ project.status | titlecase }}
-            </span>
-          </div>
-          <p class="project-description">{{ project.description }}</p>
-          <div class="project-technologies">
-            <span 
-              *ngFor="let tech of project.technologies" 
-              class="tech-tag">
-              {{ tech }}
-            </span>
-          </div>
-          <div class="project-actions">
-            <a 
-              *ngIf="project.link" 
-              [href]="project.link" 
-              class="btn btn-secondary btn-sm"
-              target="_blank"
-              rel="noopener noreferrer">
-              View Project
-            </a>
-            <span 
-              *ngIf="!project.link" 
-              class="btn btn-secondary btn-sm btn-disabled">
-              Coming Soon
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="projects-cta">
-        <a routerLink="/projects" class="btn btn-primary">View All Projects</a>
-      </div>
-    </section>
-
-    <!-- Quick Stats Section -->
-    <section class="stats-section">
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-number">3+</div>
-          <div class="stat-label">Years Experience</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">15+</div>
-          <div class="stat-label">Projects Completed</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">8+</div>
-          <div class="stat-label">Technologies</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Client Satisfaction</div>
-        </div>
-      </div>
-    </section>
+  <div class="navbar-brand">
+    <a routerLink="/" class="navbar-title" aria-label="Home">{{ name }}</a>
   </div>
+  <button
+    class="mobile-menu-toggle"
+    (click)="toggleMobileMenu()"
+    [attr.aria-expanded]="isMobileMenuOpen"
+    [attr.aria-label]="isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'"
+    type="button"
+  >
+    <span class="hamburger-line" [class.active]="isMobileMenuOpen" aria-hidden="true"></span>
+    <span class="hamburger-line" [class.active]="isMobileMenuOpen" aria-hidden="true"></span>
+    <span class="hamburger-line" [class.active]="isMobileMenuOpen" aria-hidden="true"></span>
+  </button>
+  <ul class="navbar-links" [class.mobile-open]="isMobileMenuOpen" role="menubar">
+    <li role="none"><a routerLink="/about" (click)="closeMobileMenu()" role="menuitem">About</a></li>
+    <li role="none"><a routerLink="/projects" (click)="closeMobileMenu()" role="menuitem">Projects</a></li>
+    <li role="none"><a routerLink="/contact" (click)="closeMobileMenu()" role="menuitem">Contact</a></li>
+    <li role="none" *ngIf="isLoggedIn">
+      <a routerLink="/shopping-list" class="shopping-list-btn" (click)="closeMobileMenu()" role="menuitem"
+        >Shopping List</a
+      >
+    </li>
+    <li role="none" *ngIf="!isLoggedIn">
+      <a routerLink="/login" class="login-btn" (click)="closeMobileMenu()" role="menuitem">Login</a>
+    </li>
+    <li role="none" *ngIf="isLoggedIn" class="user-info">
+      <span>Welcome, {{ loggedInUser }}</span>
+      <button (click)="onLogout()" class="logout-btn" type="button" role="menuitem">Logout</button>
+    </li>
+  </ul>
+</nav>
+
+<div class="home-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">{{ name }}</h1>
+        <h2 class="hero-subtitle">{{ title }}</h2>
+        <p class="hero-description">{{ introduction }}</p>
+        <div class="hero-actions">
+          <a routerLink="/about" class="btn btn-primary">Learn More About Me</a>
+          <a routerLink="/projects" class="btn btn-secondary">View My Work</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="profile-card">
+          <div class="profile-avatar">
+            <div class="avatar-placeholder">{{ name.charAt(0) }}</div>
+          </div>
+          <div class="status-indicator">
+            <span class="status-dot"></span>
+            <span class="status-text">Available for hire</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Preview Section -->
+  <section class="skills-preview">
+    <h3 class="section-title">Core Technologies</h3>
+    <div class="skills-grid">
+      <div
+        *ngFor="let skill of featuredSkills; trackBy: trackBySkillName"
+        class="skill-item"
+        [attr.data-category]="skill.category"
+      >
+        <div class="skill-info">
+          <span class="skill-name">{{ skill.name }}</span>
+          <span class="skill-level">{{ skill.level }}%</span>
+        </div>
+        <div class="skill-progress">
+          <div
+            class="skill-progress-fill"
+            [style.width]="getSkillWidth(skill.level)"
+            [attr.data-level]="skill.level"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Preview Section -->
+  <section class="projects-preview">
+    <h3 class="section-title">Featured Projects</h3>
+    <div class="projects-grid">
+      <div
+        *ngFor="let project of projectPreviews; trackBy: trackByProjectId"
+        class="project-card"
+        [attr.data-status]="project.status"
+      >
+        <div class="project-header">
+          <h4 class="project-title">{{ project.title }}</h4>
+          <span class="project-status" [ngClass]="getStatusClass(project.status)">
+            {{ project.status | titlecase }}
+          </span>
+        </div>
+        <p class="project-description">{{ project.description }}</p>
+        <div class="project-technologies">
+          <span *ngFor="let tech of project.technologies" class="tech-tag">
+            {{ tech }}
+          </span>
+        </div>
+        <div class="project-actions">
+          <a
+            *ngIf="project.link"
+            [href]="project.link"
+            class="btn btn-secondary btn-sm"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Project
+          </a>
+          <span *ngIf="!project.link" class="btn btn-secondary btn-sm btn-disabled"> Coming Soon </span>
+        </div>
+      </div>
+    </div>
+    <div class="projects-cta">
+      <a routerLink="/projects" class="btn btn-primary">View All Projects</a>
+    </div>
+  </section>
+
+  <!-- Quick Stats Section -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">3+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">15+</div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">8+</div>
+        <div class="stat-label">Technologies</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Client Satisfaction</div>
+      </div>
+    </div>
+  </section>
+</div>

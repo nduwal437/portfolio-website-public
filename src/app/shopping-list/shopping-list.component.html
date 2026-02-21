@@ -7,26 +7,18 @@
   <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
 
   <form (ngSubmit)="addItem()" class="add-item-form">
-    <input 
-      type="text" 
-      [(ngModel)]="newItemName" 
-      name="newItemName" 
-      placeholder="Add new item..." 
+    <input
+      type="text"
+      [(ngModel)]="newItemName"
+      name="newItemName"
+      placeholder="Add new item..."
       class="add-item-input"
       [disabled]="isLoading"
-    >
-    <button 
-      type="submit" 
-      class="add-item-button"
-      [disabled]="isLoading || !newItemName.trim()"
-    >
-      Add Item
-    </button>
+    />
+    <button type="submit" class="add-item-button" [disabled]="isLoading || !newItemName.trim()">Add Item</button>
   </form>
 
-  <div class="loading-spinner" *ngIf="isLoading">
-    Loading...
-  </div>
+  <div class="loading-spinner" *ngIf="isLoading">Loading...</div>
 
   <div class="shopping-sections" *ngIf="!isLoading">
     <!-- Required Items Section -->
@@ -42,16 +34,10 @@
               [disabled]="isLoading"
               class="item-checkbox"
               [attr.aria-label]="'Mark ' + item.name + ' as received'"
-            >
+            />
             <span class="item-name">{{ item.name }}</span>
           </div>
-          <button 
-            (click)="deleteItem(item.id)" 
-            class="delete-button"
-            [disabled]="isLoading"
-          >
-            Delete
-          </button>
+          <button (click)="deleteItem(item.id)" class="delete-button" [disabled]="isLoading">Delete</button>
         </li>
         <li *ngIf="requiredItems.length === 0" class="no-items-message">
           No required items. All items have been received!
@@ -72,20 +58,12 @@
               [disabled]="isLoading"
               class="item-checkbox"
               [attr.aria-label]="'Mark ' + item.name + ' as required'"
-            >
+            />
             <span class="item-name completed">{{ item.name }}</span>
           </div>
-          <button 
-            (click)="deleteItem(item.id)" 
-            class="delete-button"
-            [disabled]="isLoading"
-          >
-            Delete
-          </button>
+          <button (click)="deleteItem(item.id)" class="delete-button" [disabled]="isLoading">Delete</button>
         </li>
-        <li *ngIf="receivedItems.length === 0" class="no-items-message">
-          No received items yet.
-        </li>
+        <li *ngIf="receivedItems.length === 0" class="no-items-message">No received items yet.</li>
       </ul>
     </div>
   </div>

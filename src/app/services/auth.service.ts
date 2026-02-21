@@ -16,11 +16,7 @@ export class AuthService implements OnDestroy {
   private activitySubscription?: Subscription;
   private lastActivity = Date.now();
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private ngZone: NgZone
-  ) {
+  constructor(private http: HttpClient, private router: Router, private ngZone: NgZone) {
     this.initializeInactivityDetection();
     this.checkAuthOnPageLoad();
   }
@@ -37,8 +33,9 @@ export class AuthService implements OnDestroy {
   /**
    * Login user with email and password
    */
-  login(email: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.API_URL}/login`, { email, password })
+  login(email: string, password: string): Observable<{ authToken: string; user: { email: string } }> {
+    return this.http
+      .post<{ authToken: string; user: { email: string } }>(`${this.API_URL}/login`, { email, password })
       .pipe(
         tap(response => {
           if (response && response.authToken) {
@@ -143,9 +140,7 @@ export class AuthService implements OnDestroy {
     const activityEvents = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'];
 
     // Create observable from activity events
-    const activityStreams$ = activityEvents.map(event =>
-      fromEvent(document, event)
-    );
+    const activityStreams$ = activityEvents.map(event => fromEvent(document, event));
 
     // Merge all activity streams and throttle to avoid excessive calls
     this.activitySubscription = merge(...activityStreams$)

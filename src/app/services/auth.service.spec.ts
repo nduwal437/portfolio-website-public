@@ -9,36 +9,37 @@ describe('AuthService', () => {
   let service: AuthService;
   let httpMock: HttpTestingController;
   let router: jasmine.SpyObj<Router>;
-  let ngZone: jasmine.SpyObj<NgZone>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  let _ngZone: jasmine.SpyObj<NgZone>;
 
   beforeEach(() => {
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
     const ngZoneSpy = jasmine.createSpyObj('NgZone', ['run', 'runOutsideAngular']);
-    
+
     // Setup NgZone spy to call the callback immediately
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ngZoneSpy.runOutsideAngular.and.callFake((fn: () => any) => fn());
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ngZoneSpy.run.and.callFake((fn: () => any) => fn());
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [
-        AuthService,
-        { provide: Router, useValue: routerSpy },
-        { provide: NgZone, useValue: ngZoneSpy }
-      ]
+      providers: [AuthService, { provide: Router, useValue: routerSpy }, { provide: NgZone, useValue: ngZoneSpy }]
     });
 
     service = TestBed.inject(AuthService);
     httpMock = TestBed.inject(HttpTestingController);
     router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
-    ngZone = TestBed.inject(NgZone) as jasmine.SpyObj<NgZone>;
+    _ngZone = TestBed.inject(NgZone) as jasmine.SpyObj<NgZone>;
   });
 
   afterEach(() => {
     httpMock.verify();
     localStorage.clear();
     // Clear any timers
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (service && (service as any).inactivityTimer) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       clearTimeout((service as any).inactivityTimer);
     }
   });
@@ -74,7 +75,7 @@ describe('AuthService', () => {
 
       service.login(email, password).subscribe({
         next: () => fail('Should have failed'),
-        error: (error) => {
+        error: error => {
           expect(error.status).toBe(401);
         }
       });
@@ -101,31 +102,33 @@ describe('AuthService', () => {
   });
 
   describe('isLoggedIn', () => {
-    it('should return true when user is logged in', (done) => {
+    it('should return true when user is logged in', done => {
       localStorage.setItem('authToken', 'test-token');
-      
+
       service.isLoggedIn().subscribe((isLoggedIn: boolean) => {
         if (isLoggedIn) {
           expect(isLoggedIn).toBeTrue();
           done();
         }
       });
-      
+
       // Trigger the subject update
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (service as any).isLoggedInSubject.next(true);
     });
 
-    it('should return false when user is not logged in', (done) => {
+    it('should return false when user is not logged in', done => {
       localStorage.removeItem('authToken');
-      
+
       service.isLoggedIn().subscribe((isLoggedIn: boolean) => {
         if (!isLoggedIn) {
           expect(isLoggedIn).toBeFalse();
           done();
         }
       });
-      
+
       // Trigger the subject update
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (service as any).isLoggedInSubject.next(false);
     });
   });
@@ -157,7 +160,7 @@ describe('AuthService', () => {
   });
 
   describe('authentication state observable', () => {
-    it('should emit authentication state changes', (done) => {
+    it('should emit authentication state changes', done => {
       service.isLoggedIn().subscribe((isLoggedIn: boolean) => {
         if (isLoggedIn) {
           expect(isLoggedIn).toBeTrue();

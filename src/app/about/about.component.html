@@ -13,12 +13,8 @@
       <h2 class="section-title">Who I Am</h2>
       <p class="summary-text">{{ personalInfo.summary }}</p>
       <div class="contact-info">
-        <div class="contact-item">
-          <strong>Email:</strong> {{ personalInfo.email }}
-        </div>
-        <div class="contact-item">
-          <strong>Location:</strong> {{ personalInfo.location }}
-        </div>
+        <div class="contact-item"><strong>Email:</strong> {{ personalInfo.email }}</div>
+        <div class="contact-item"><strong>Location:</strong> {{ personalInfo.location }}</div>
       </div>
     </div>
   </section>
@@ -58,9 +54,7 @@
   <section class="experience-section">
     <h2 class="section-title">Professional Experience</h2>
     <div class="timeline">
-      <div 
-        *ngFor="let exp of experiences; trackBy: trackByExperienceId" 
-        class="timeline-item">
+      <div *ngFor="let exp of experiences; trackBy: trackByExperienceId" class="timeline-item">
         <div class="timeline-marker"></div>
         <div class="timeline-content">
           <div class="experience-header">
@@ -70,9 +64,7 @@
           </div>
           <p class="job-description">{{ exp.description }}</p>
           <div class="job-technologies">
-            <span 
-              *ngFor="let tech of exp.technologies" 
-              class="tech-tag">
+            <span *ngFor="let tech of exp.technologies" class="tech-tag">
               {{ tech }}
             </span>
           </div>
@@ -85,9 +77,7 @@
   <section class="education-section">
     <h2 class="section-title">Education</h2>
     <div class="education-list">
-      <div 
-        *ngFor="let edu of education; trackBy: trackByEducationId" 
-        class="education-item">
+      <div *ngFor="let edu of education; trackBy: trackByEducationId" class="education-item">
         <h3 class="degree-title">{{ edu.degree }}</h3>
         <div class="institution">{{ edu.institution }}</div>
         <div class="education-period">{{ edu.period }}</div>
@@ -100,9 +90,7 @@
   <section class="interests-section">
     <h2 class="section-title">Interests & Hobbies</h2>
     <div class="interests-grid">
-      <div 
-        *ngFor="let interest of interests" 
-        class="interest-item">
+      <div *ngFor="let interest of interests" class="interest-item">
         {{ interest }}
       </div>
     </div>

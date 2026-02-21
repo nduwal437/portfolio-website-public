@@ -17,7 +17,7 @@ export interface ShoppingItem {
 export class ShoppingListService {
   private readonly API_URL = environment.apiBaseUrl + '/shopping_list_item';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   /**
    * Get all shopping list items
@@ -36,8 +36,8 @@ export class ShoppingListService {
   /**
    * Delete an item from the shopping list
    */
-  deleteItem(id: number): Observable<any> {
-    return this.http.delete(`${this.API_URL}/${id}`);
+  deleteItem(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/${id}`);
   }
 
   /**

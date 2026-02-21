@@ -16,8 +16,8 @@ const routes: Routes = [
   { path: 'skills', component: SkillsComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },
-  { 
-    path: 'shopping-list', 
+  {
+    path: 'shopping-list',
     component: ShoppingListComponent,
     canActivate: [AuthGuard]
   },
@@ -25,13 +25,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    enableTracing: false, // Set to true for debugging
-    scrollPositionRestoration: 'top',
-    anchorScrolling: 'enabled',
-    onSameUrlNavigation: 'reload',
-    preloadingStrategy: NoPreloading // Using the actual NoPreloading class
-  })],
+  imports: [
+    RouterModule.forRoot(routes, {
+      enableTracing: false, // Set to true for debugging
+      scrollPositionRestoration: 'top',
+      anchorScrolling: 'enabled',
+      onSameUrlNavigation: 'reload',
+      preloadingStrategy: NoPreloading // Using the actual NoPreloading class
+    })
+  ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

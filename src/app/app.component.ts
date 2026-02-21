@@ -15,10 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private authSubscription?: Subscription;
   private routerSubscription?: Subscription;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.monitorAuthenticationStatus();
@@ -52,7 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private handleRouteChanges(): void {
     this.routerSubscription = this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event) => {
+      .subscribe(event => {
         const navigationEvent = event as NavigationEnd;
         // Check session validity on route changes
         if (this.isProtectedRoute(navigationEvent.url)) {

@@ -4,31 +4,23 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { AppRoutingModule } from './app-routing.module';
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
-import { ProjectsComponent } from './projects/projects.component';
-import { SkillsComponent } from './skills/skills.component';
-import { ContactComponent } from './contact/contact.component';
-import { LoginComponent } from './login/login.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { AuthGuard } from './guards/auth.guard';
 
 // Mock components for testing
 @Component({ template: '' })
-class MockHomeComponent { }
+class MockHomeComponent {}
 @Component({ template: '' })
-class MockAboutComponent { }
+class MockAboutComponent {}
 @Component({ template: '' })
-class MockProjectsComponent { }
+class MockProjectsComponent {}
 @Component({ template: '' })
-class MockSkillsComponent { }
+class MockSkillsComponent {}
 @Component({ template: '' })
-class MockContactComponent { }
+class MockContactComponent {}
 @Component({ template: '' })
-class MockLoginComponent { }
+class MockLoginComponent {}
 @Component({ template: '' })
-class MockShoppingListComponent { }
+class MockShoppingListComponent {}
 
 describe('AppRoutingModule', () => {
   let router: Router;
@@ -39,20 +31,22 @@ describe('AppRoutingModule', () => {
     const authGuardSpy = jasmine.createSpyObj('AuthGuard', ['canActivate']);
 
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([
-        { path: '', component: MockHomeComponent },
-        { path: 'about', component: MockAboutComponent },
-        { path: 'projects', component: MockProjectsComponent },
-        { path: 'skills', component: MockSkillsComponent },
-        { path: 'contact', component: MockContactComponent },
-        { path: 'login', component: MockLoginComponent },
-        { 
-          path: 'shopping-list', 
-          component: MockShoppingListComponent,
-          canActivate: [AuthGuard]
-        },
-        { path: '**', redirectTo: '' }
-      ])],
+      imports: [
+        RouterTestingModule.withRoutes([
+          { path: '', component: MockHomeComponent },
+          { path: 'about', component: MockAboutComponent },
+          { path: 'projects', component: MockProjectsComponent },
+          { path: 'skills', component: MockSkillsComponent },
+          { path: 'contact', component: MockContactComponent },
+          { path: 'login', component: MockLoginComponent },
+          {
+            path: 'shopping-list',
+            component: MockShoppingListComponent,
+            canActivate: [AuthGuard]
+          },
+          { path: '**', redirectTo: '' }
+        ])
+      ],
       declarations: [
         MockHomeComponent,
         MockAboutComponent,
@@ -62,9 +56,7 @@ describe('AppRoutingModule', () => {
         MockLoginComponent,
         MockShoppingListComponent
       ],
-      providers: [
-        { provide: AuthGuard, useValue: authGuardSpy }
-      ]
+      providers: [{ provide: AuthGuard, useValue: authGuardSpy }]
     }).compileComponents();
 
     router = TestBed.inject(Router);

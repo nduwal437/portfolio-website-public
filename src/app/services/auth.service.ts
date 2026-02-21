@@ -1,28 +1,39 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, fromEvent, merge, timer } from 'rxjs';
-import { tap, throttleTime, map, switchMap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, Subscription, fromEvent, merge } from 'rxjs';
+import { tap, throttleTime } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  private readonly API_URL = 'https://x8ki-letl-twmt.n7.xano.io/api:DvF6ymdH/auth';
+export class AuthService implements OnDestroy {
+  private readonly API_URL = environment.apiBaseUrl + '/auth';
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
   private readonly INACTIVITY_TIMEOUT = 60 * 60 * 1000; // 1 hour in milliseconds
-  private inactivityTimer?: any;
+  private inactivityTimer?: ReturnType<typeof setTimeout>;
+  private activitySubscription?: Subscription;
   private lastActivity = Date.now();
-  
+
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private router: Router,
     private ngZone: NgZone
   ) {
     this.initializeInactivityDetection();
     this.checkAuthOnPageLoad();
   }
-  
+
+  ngOnDestroy(): void {
+    if (this.activitySubscription) {
+      this.activitySubscription.unsubscribe();
+    }
+    if (this.inactivityTimer) {
+      clearTimeout(this.inactivityTimer);
+    }
+  }
+
   /**
    * Login user with email and password
    */
@@ -38,7 +49,7 @@ export class AuthService {
         })
       );
   }
-  
+
   /**
    * Logout the current user
    */
@@ -48,17 +59,17 @@ export class AuthService {
       clearTimeout(this.inactivityTimer);
       this.inactivityTimer = undefined;
     }
-    
+
     // Clear all auth-related data
     localStorage.removeItem('authToken');
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('user');
     localStorage.removeItem('lastActivity');
-    
+
     this.isLoggedInSubject.next(false);
     this.router.navigate(['/']);
   }
-  
+
   /**
    * Store auth information
    */
@@ -68,21 +79,21 @@ export class AuthService {
     localStorage.setItem('user', user);
     this.isLoggedInSubject.next(true);
   }
-  
+
   /**
    * Check if user is logged in
    */
   isLoggedIn(): Observable<boolean> {
     return this.isLoggedInSubject.asObservable();
   }
-  
+
   /**
    * Get current authentication token
    */
   getToken(): string | null {
     return localStorage.getItem('authToken');
   }
-  
+
   /**
    * Get current user email
    */
@@ -96,14 +107,14 @@ export class AuthService {
   isSessionValid(): boolean {
     const token = this.getToken();
     const lastActivity = localStorage.getItem('lastActivity');
-    
+
     if (!token) return false;
-    
+
     if (lastActivity) {
       const timeSinceLastActivity = Date.now() - parseInt(lastActivity, 10);
       return timeSinceLastActivity <= this.INACTIVITY_TIMEOUT;
     }
-    
+
     return true; // If no lastActivity timestamp, assume valid for now
   }
 
@@ -114,7 +125,7 @@ export class AuthService {
     this.updateLastActivityTimestamp();
     this.resetInactivityTimer();
   }
-  
+
   /**
    * Check if token exists in localStorage
    */
@@ -130,14 +141,14 @@ export class AuthService {
 
     // Activity events to monitor
     const activityEvents = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'];
-    
+
     // Create observable from activity events
-    const activityStreams$ = activityEvents.map(event => 
+    const activityStreams$ = activityEvents.map(event =>
       fromEvent(document, event)
     );
 
     // Merge all activity streams and throttle to avoid excessive calls
-    merge(...activityStreams$)
+    this.activitySubscription = merge(...activityStreams$)
       .pipe(throttleTime(1000)) // Throttle to once per second
       .subscribe(() => {
         this.resetInactivityTimer();
@@ -152,7 +163,7 @@ export class AuthService {
    */
   private resetInactivityTimer(): void {
     this.lastActivity = Date.now();
-    
+
     if (this.inactivityTimer) {
       clearTimeout(this.inactivityTimer);
     }
@@ -188,10 +199,10 @@ export class AuthService {
 
     const token = this.getToken();
     const lastActivity = localStorage.getItem('lastActivity');
-    
+
     if (token && lastActivity) {
       const timeSinceLastActivity = Date.now() - parseInt(lastActivity, 10);
-      
+
       // If more than 1 hour has passed since last activity, logout
       if (timeSinceLastActivity > this.INACTIVITY_TIMEOUT) {
         console.warn('Session expired due to inactivity');

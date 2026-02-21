@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './services/auth.service';
+import { PROTECTED_ROUTES } from './models';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -70,7 +71,6 @@ export class AppComponent implements OnInit, OnDestroy {
    * Determine if a route is protected (requires authentication)
    */
   private isProtectedRoute(url: string): boolean {
-    const protectedRoutes = ['/shopping-list'];
-    return protectedRoutes.some(route => url.startsWith(route));
+    return PROTECTED_ROUTES.some(route => url.startsWith(route));
   }
 }

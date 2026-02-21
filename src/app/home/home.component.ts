@@ -1,21 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, HostListener } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Subject, takeUntil } from 'rxjs';
-
-interface ProjectPreview {
-  id: number;
-  title: string;
-  description: string;
-  technologies: string[];
-  status: 'completed' | 'in-progress' | 'planned';
-  link?: string;
-}
-
-interface Skill {
-  name: string;
-  level: number;
-  category: 'frontend' | 'backend' | 'tools';
-}
+import { ProjectPreview, Skill } from '../models';
 
 @Component({
   selector: 'app-home',

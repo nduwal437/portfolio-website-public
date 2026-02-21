@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { environment } from '../../environments/environment';
 
@@ -8,15 +9,22 @@ import { environment } from '../../environments/environment';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   email: string = '';
   password: string = '';
   errorMessage: string = '';
   isLoading: boolean = false;
 
+  private readonly destroy$ = new Subject<void>();
+
   constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   // Conditional logging method that won't trigger debugger pauses
@@ -38,7 +46,7 @@ export class LoginComponent implements OnInit {
     this.errorMessage = '';
 
     // Call the authentication service
-    this.authService.login(this.email, this.password).subscribe({
+    this.authService.login(this.email, this.password).pipe(takeUntil(this.destroy$)).subscribe({
       next: () => {
         this.isLoading = false;
         this.router.navigate(['/']);

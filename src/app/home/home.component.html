@@ -21,7 +21,7 @@
       <li role="none" *ngIf="!isLoggedIn"><a routerLink="/login" class="login-btn" (click)="closeMobileMenu()" role="menuitem">Login</a></li>
       <li role="none" *ngIf="isLoggedIn" class="user-info">
         <span>Welcome, {{ loggedInUser }}</span>
-        <a href="javascript:void(0)" (click)="onLogout()" class="logout-btn" role="menuitem">Logout</a>
+        <button (click)="onLogout()" class="logout-btn" type="button" role="menuitem">Logout</button>
       </li>
     </ul>
   </nav>

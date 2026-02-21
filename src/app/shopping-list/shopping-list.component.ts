@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { ShoppingListService, ShoppingItem } from '../services/shopping-list.service';
 import { environment } from '../../environments/environment';
 
@@ -7,7 +8,7 @@ import { environment } from '../../environments/environment';
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.css']
 })
-export class ShoppingListComponent implements OnInit {
+export class ShoppingListComponent implements OnInit, OnDestroy {
   shoppingItems: ShoppingItem[] = [];
   requiredItems: ShoppingItem[] = [];
   receivedItems: ShoppingItem[] = [];
@@ -15,10 +16,17 @@ export class ShoppingListComponent implements OnInit {
   isLoading: boolean = false;
   errorMessage: string = '';
 
+  private readonly destroy$ = new Subject<void>();
+
   constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit(): void {
     this.loadItems();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   // Conditional logging method that won't trigger debugger pauses
@@ -33,7 +41,7 @@ export class ShoppingListComponent implements OnInit {
     this.isLoading = true;
     this.errorMessage = '';
     
-    this.shoppingListService.getItems().subscribe({
+    this.shoppingListService.getItems().pipe(takeUntil(this.destroy$)).subscribe({
       next: (items) => {
         this.shoppingItems = items;
         this.separateItems();
@@ -67,7 +75,7 @@ export class ShoppingListComponent implements OnInit {
       is_needed: true
     };
     
-    this.shoppingListService.addItem(this.newItemName.trim()).subscribe({
+    this.shoppingListService.addItem(this.newItemName.trim()).pipe(takeUntil(this.destroy$)).subscribe({
       next: (newItem) => {
         // Ensure the new item is marked as needed regardless of API response
         newItem.is_needed = true;
@@ -88,7 +96,7 @@ export class ShoppingListComponent implements OnInit {
     this.isLoading = true;
     this.errorMessage = '';
     
-    this.shoppingListService.deleteItem(id).subscribe({
+    this.shoppingListService.deleteItem(id).pipe(takeUntil(this.destroy$)).subscribe({
       next: () => {
         this.shoppingItems = this.shoppingItems.filter(item => item.id !== id);
         this.separateItems();
@@ -102,6 +110,10 @@ export class ShoppingListComponent implements OnInit {
     });
   }
 
+  trackByItemId(index: number, item: ShoppingItem): number {
+    return item.id;
+  }
+
   toggleItemStatus(item: ShoppingItem): void {
     this.isLoading = true;
     this.errorMessage = '';
@@ -109,7 +121,7 @@ export class ShoppingListComponent implements OnInit {
     // Toggle the is_needed status
     const newStatus = !item.is_needed;
     
-    this.shoppingListService.updateItem(item.id, { is_needed: newStatus }).subscribe({
+    this.shoppingListService.updateItem(item.id, { is_needed: newStatus }).pipe(takeUntil(this.destroy$)).subscribe({
       next: (updatedItem) => {
         // Update the item in the local array
         const index = this.shoppingItems.findIndex(i => i.id === item.id);

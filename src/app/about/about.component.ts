@@ -1,21 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-
-interface Experience {
-  id: number;
-  title: string;
-  company: string;
-  period: string;
-  description: string;
-  technologies: string[];
-}
-
-interface Education {
-  id: number;
-  degree: string;
-  institution: string;
-  period: string;
-  description?: string;
-}
+import { Experience, Education } from '../models';
 
 @Component({
   selector: 'app-about',

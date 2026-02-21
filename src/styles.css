@@ -480,6 +480,9 @@ button:focus, a:focus {
   border-radius: 6px;
   font-size: 0.9rem;
   padding: 6px 12px !important;
+  color: white;
+  font-family: inherit;
+  cursor: pointer;
 }
 
 .logout-btn:hover {

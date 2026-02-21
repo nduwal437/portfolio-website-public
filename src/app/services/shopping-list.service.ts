@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface ShoppingItem {
   id: number;
@@ -14,7 +15,7 @@ export interface ShoppingItem {
   providedIn: 'root'
 })
 export class ShoppingListService {
-  private readonly API_URL = 'https://x8ki-letl-twmt.n7.xano.io/api:DvF6ymdH/shopping_list_item';
+  private readonly API_URL = environment.apiBaseUrl + '/shopping_list_item';
 
   constructor(private http: HttpClient) { }
 

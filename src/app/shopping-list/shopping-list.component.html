@@ -33,14 +33,15 @@
     <div class="shopping-section">
       <h3 class="section-title">Required Items</h3>
       <ul class="shopping-items-list">
-        <li *ngFor="let item of requiredItems" class="shopping-item">
+        <li *ngFor="let item of requiredItems; trackBy: trackByItemId" class="shopping-item">
           <div class="item-container">
-            <input 
-              type="checkbox" 
-              [checked]="false" 
-              (change)="toggleItemStatus(item)" 
+            <input
+              type="checkbox"
+              [checked]="!item.is_needed"
+              (change)="toggleItemStatus(item)"
               [disabled]="isLoading"
               class="item-checkbox"
+              [attr.aria-label]="'Mark ' + item.name + ' as received'"
             >
             <span class="item-name">{{ item.name }}</span>
           </div>
@@ -62,14 +63,15 @@
     <div class="shopping-section">
       <h3 class="section-title">Received Items</h3>
       <ul class="shopping-items-list">
-        <li *ngFor="let item of receivedItems" class="shopping-item">
+        <li *ngFor="let item of receivedItems; trackBy: trackByItemId" class="shopping-item">
           <div class="item-container">
-            <input 
-              type="checkbox" 
-              [checked]="true" 
-              (change)="toggleItemStatus(item)" 
+            <input
+              type="checkbox"
+              [checked]="!item.is_needed"
+              (change)="toggleItemStatus(item)"
               [disabled]="isLoading"
               class="item-checkbox"
+              [attr.aria-label]="'Mark ' + item.name + ' as required'"
             >
             <span class="item-name completed">{{ item.name }}</span>
           </div>

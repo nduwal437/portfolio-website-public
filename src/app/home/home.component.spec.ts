@@ -1,3 +1,4 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
@@ -12,11 +13,12 @@ describe('HomeComponent', () => {
   let fixture: ComponentFixture<HomeComponent>;
   let authService: jasmine.SpyObj<AuthService>;
   let router: Router;
+  let cd: ChangeDetectorRef;
 
   beforeEach(async () => {
-    const authServiceSpy = jasmine.createSpyObj('AuthService', ['logout', 'isLoggedIn', 'getCurrentUser'], {
-      isLoggedIn$: of(false)
-    });
+    const authServiceSpy = jasmine.createSpyObj('AuthService', ['logout', 'isLoggedIn', 'getCurrentUser']);
+    authServiceSpy.isLoggedIn.and.returnValue(of(false));
+    authServiceSpy.getCurrentUser.and.returnValue(null);
 
     await TestBed.configureTestingModule({
       declarations: [HomeComponent],
@@ -31,6 +33,7 @@ describe('HomeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
+    cd = fixture.debugElement.injector.get(ChangeDetectorRef);
     fixture.detectChanges();
   });
 
@@ -62,6 +65,7 @@ describe('HomeComponent', () => {
 
   it('should display login button when not logged in', () => {
     component.isLoggedIn = false;
+    cd.markForCheck();
     fixture.detectChanges();
 
     const loginBtn = fixture.debugElement.query(By.css('.login-btn'));
@@ -72,6 +76,7 @@ describe('HomeComponent', () => {
   it('should display logout button and user info when logged in', () => {
     component.isLoggedIn = true;
     component.loggedInUser = 'test@example.com';
+    cd.markForCheck();
     fixture.detectChanges();
 
     const logoutBtn = fixture.debugElement.query(By.css('.logout-btn'));
@@ -84,6 +89,7 @@ describe('HomeComponent', () => {
 
   it('should show shopping list link when logged in', () => {
     component.isLoggedIn = true;
+    cd.markForCheck();
     fixture.detectChanges();
 
     const shoppingListBtn = fixture.debugElement.query(By.css('.shopping-list-btn'));
@@ -92,6 +98,7 @@ describe('HomeComponent', () => {
 
   it('should hide shopping list link when not logged in', () => {
     component.isLoggedIn = false;
+    cd.markForCheck();
     fixture.detectChanges();
 
     const shoppingListBtn = fixture.debugElement.query(By.css('.shopping-list-btn'));

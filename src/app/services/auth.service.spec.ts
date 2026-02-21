@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Router } from '@angular/router';
-import { NgZone } from '@angular/core';
 
 import { AuthService } from './auth.service';
 
@@ -9,28 +8,18 @@ describe('AuthService', () => {
   let service: AuthService;
   let httpMock: HttpTestingController;
   let router: jasmine.SpyObj<Router>;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  let _ngZone: jasmine.SpyObj<NgZone>;
 
   beforeEach(() => {
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-    const ngZoneSpy = jasmine.createSpyObj('NgZone', ['run', 'runOutsideAngular']);
-
-    // Setup NgZone spy to call the callback immediately
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ngZoneSpy.runOutsideAngular.and.callFake((fn: () => any) => fn());
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ngZoneSpy.run.and.callFake((fn: () => any) => fn());
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [AuthService, { provide: Router, useValue: routerSpy }, { provide: NgZone, useValue: ngZoneSpy }]
+      providers: [AuthService, { provide: Router, useValue: routerSpy }]
     });
 
     service = TestBed.inject(AuthService);
     httpMock = TestBed.inject(HttpTestingController);
     router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
-    _ngZone = TestBed.inject(NgZone) as jasmine.SpyObj<NgZone>;
   });
 
   afterEach(() => {

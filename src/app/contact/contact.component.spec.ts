@@ -39,12 +39,17 @@ describe('ContactComponent', () => {
     expect(submitButton).toBeTruthy();
   });
 
-  it('should disable submit button when form is invalid', () => {
+  it('should disable submit button when form is invalid', async () => {
+    await fixture.whenStable();
+    fixture.detectChanges();
     const submitButton = fixture.debugElement.query(By.css('button[type="submit"]'));
     expect(submitButton.nativeElement.disabled).toBeTrue();
   });
 
   it('should enable submit button when form is valid', async () => {
+    // Wait for template-driven form to initialize
+    await fixture.whenStable();
+
     const nameInput = fixture.debugElement.query(By.css('input[name="name"]'));
     const emailInput = fixture.debugElement.query(By.css('input[name="email"]'));
     const subjectInput = fixture.debugElement.query(By.css('input[name="subject"]'));
@@ -63,6 +68,7 @@ describe('ContactComponent', () => {
     messageTextarea.nativeElement.value = 'Test message content';
     messageTextarea.nativeElement.dispatchEvent(new Event('input'));
 
+    fixture.detectChanges();
     await fixture.whenStable();
     fixture.detectChanges();
 

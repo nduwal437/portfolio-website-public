@@ -66,7 +66,7 @@ describe('AppRoutingModule', () => {
 
   it('should navigate to home component for empty path', async () => {
     await router.navigate(['']);
-    expect(location.path()).toBe('');
+    expect(location.path()).toBe('/');
   });
 
   it('should navigate to about component', async () => {
@@ -96,7 +96,7 @@ describe('AppRoutingModule', () => {
 
   it('should redirect unknown routes to home', async () => {
     await router.navigate(['/unknown-route']);
-    expect(location.path()).toBe('');
+    expect(location.path()).toBe('/');
   });
 
   it('should protect shopping-list route with AuthGuard', async () => {
@@ -110,6 +110,6 @@ describe('AppRoutingModule', () => {
     await router.navigate(['/shopping-list']);
     expect(authGuard.canActivate).toHaveBeenCalled();
     // When guard returns false, navigation should be prevented
-    expect(location.path()).toBe('');
+    expect(location.path()).toBe('/');
   });
 });

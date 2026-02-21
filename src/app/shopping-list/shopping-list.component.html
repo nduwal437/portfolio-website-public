@@ -30,6 +30,32 @@
     </button>
   </form>
 
+  <!-- Search bar (only visible when items exist) -->
+  <div class="search-bar" *ngIf="!isInitialLoading && shoppingItems.length > 0">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearchChange()"
+      placeholder="Search items..."
+      class="search-input"
+      (keydown.escape)="clearSearch()"
+    />
+    <button
+      *ngIf="searchTerm"
+      class="search-clear-button"
+      (click)="clearSearch()"
+      aria-label="Clear search"
+    >&times;</button>
+  </div>
+
+  <!-- No search results -->
+  <div
+    class="no-results"
+    *ngIf="!isInitialLoading && searchTerm && requiredItems.length === 0 && receivedItems.length === 0"
+  >
+    No items matching &ldquo;{{ searchTerm }}&rdquo;
+  </div>
+
   <!-- Skeleton loading -->
   <div class="skeleton-container" role="status" aria-label="Loading shopping list" *ngIf="isInitialLoading">
     <div class="skeleton-section">

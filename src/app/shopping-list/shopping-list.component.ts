@@ -42,6 +42,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   requiredItems: ShoppingItem[] = [];
   receivedItems: ShoppingItem[] = [];
   newItemName = '';
+  searchTerm = '';
   errorMessage = '';
 
   // Per-item loading states (replaces global isLoading)
@@ -151,8 +152,21 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   separateItems(): void {
-    this.requiredItems = this.shoppingItems.filter(item => item.is_needed);
-    this.receivedItems = this.shoppingItems.filter(item => !item.is_needed);
+    const term = this.searchTerm.trim().toLowerCase();
+    const filtered = term
+      ? this.shoppingItems.filter(item => item.name.toLowerCase().includes(term))
+      : this.shoppingItems;
+    this.requiredItems = filtered.filter(item => item.is_needed);
+    this.receivedItems = filtered.filter(item => !item.is_needed);
+  }
+
+  onSearchChange(): void {
+    this.separateItems();
+  }
+
+  clearSearch(): void {
+    this.searchTerm = '';
+    this.separateItems();
   }
 
   // --- Add item (optimistic) ---

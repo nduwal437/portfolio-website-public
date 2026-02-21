@@ -230,6 +230,7 @@ describe('AuthService', () => {
     it('should clear inactivity timer', () => {
       const spy = spyOn(window, 'clearTimeout').and.callThrough();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       const timer = ((service as any).inactivityTimer = setTimeout(() => {}, 100000));
 
       service.ngOnDestroy();
@@ -251,6 +252,7 @@ describe('AuthService', () => {
     it('should clear inactivity timer on logout', () => {
       localStorage.setItem('authToken', 'test-token');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       (service as any).inactivityTimer = setTimeout(() => {}, 100000);
 
       service.logout();

@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Angular 13.2 portfolio website for Nikesh Duwal, deployed on GitHub Pages at www.nikeshduwal.com.np. Features portfolio pages (Home, About, Projects, Skills, Contact), authentication via Xano backend, and a protected shopping list CRUD feature.
+Angular 13.2 portfolio website for Nikesh Duwal, deployed on GitHub Pages at www.nikeshduwal.com.np. Features portfolio pages (Home, About, Projects, Skills, Contact), authentication via Xano backend, and a protected shopping list feature with search/filter, inline editing, optimistic updates, undo-delete, swipe-to-delete, and animations.
 
 ## Tech Stack
 
@@ -45,10 +45,10 @@ src/app/
 │   └── index.ts             # Barrel export
 ├── projects/           # Projects page (placeholder)
 ├── services/
-│   ├── auth.interceptor.ts    # Adds Bearer token to HTTP requests
-│   ├── auth.service.ts        # Login/logout, session management, inactivity timeout
+│   ├── auth.interceptor.ts    # Adds Bearer token, updates activity on API responses
+│   ├── auth.service.ts        # Login/logout, session management, inactivity timeout (NgZone)
 │   └── shopping-list.service.ts # CRUD for shopping list items
-├── shopping-list/      # Protected shopping list (requires auth)
+├── shopping-list/      # Protected shopping list with search, inline edit, undo-delete, animations
 ├── skills/             # Skills page (placeholder)
 ├── app-routing.module.ts
 ├── app.component.ts
@@ -61,7 +61,10 @@ e2e/                    # Playwright E2E tests
 - **NgModule-based** — AppModule declares all components; not using standalone components
 - **OnPush change detection** on HomeComponent and AboutComponent
 - **RxJS subscription cleanup** uses `takeUntil(this.destroy$)` pattern with `Subject<void>` in OnDestroy
-- **Auth flow**: JWT token stored in localStorage, AuthInterceptor adds Bearer header, AuthGuard protects `/shopping-list`, 1-hour inactivity timeout with activity tracking
+- **Auth flow**: JWT token stored in localStorage, AuthInterceptor adds Bearer header and updates activity on successful responses, AuthGuard protects `/shopping-list`, 1-hour inactivity timeout with NgZone-aware timer and activity tracking via DOM events
+- **Optimistic updates** on ShoppingListComponent — add, delete, toggle, and rename all update UI immediately with rollback on error
+- **Undo-delete pattern** — deleted items show a 5-second undo toast before API call is finalized
+- **Angular animations** — list items use enter/leave transitions, undo toast has slide-in animation
 - **Environment config**: API base URL in `src/environments/environment.ts` and `environment.prod.ts`
 
 ## TypeScript Path Aliases
@@ -89,7 +92,8 @@ Backend is Xano at the URL configured in `environment.apiBaseUrl`. Endpoints:
 
 - **Unit tests**: Karma + Jasmine. Run `npm test`. Specs are colocated with components (`*.spec.ts`).
 - **E2E tests**: Playwright. Run `npm run e2e`. Tests live in `e2e/`. Config auto-starts dev server.
-- **Coverage target**: 80%+. Current coverage is partial — several components still only have boilerplate "should create" tests.
+- **E2E test suites**: Navigation, Contact Form, Authentication Flow, Responsive Design, Accessibility
+- **Coverage target**: 80%+. Shopping list, auth service, and auth interceptor have comprehensive tests. Some components still only have boilerplate "should create" tests.
 
 ## Code Style
 
@@ -102,9 +106,9 @@ Backend is Xano at the URL configured in `environment.apiBaseUrl`. Endpoints:
 
 ## Deployment
 
-GitHub Pages via `peaceiris/actions-gh-pages@v3`. Build outputs to `docs/` with `index.html` copied to `404.html` for client-side routing. Custom domain configured via CNAME file in `src/assets/`.
+GitHub Pages served from `docs/` on the main branch. CI builds into `docs/`, copies `index.html` to `404.html` for SPA routing, and commits directly to main. Custom domain configured via CNAME file in `src/assets/`.
 
-CI pipeline (`.github/workflows/ci.yml`): lint → build → test → deploy (on main push only).
+CI pipeline (`.github/workflows/ci.yml`): lint → build → test → deploy (commits `docs/` on main push).
 
 ## Custom Skills (Slash Commands)
 

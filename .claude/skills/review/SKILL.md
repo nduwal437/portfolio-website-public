@@ -36,6 +36,8 @@ Review code changes for quality, security, and adherence to project conventions.
    - `takeUntil(this.destroy$)` for RxJS subscriptions
    - `trackBy` for all `*ngFor` directives
    - New components declared in AppModule
+   - Optimistic UI updates with rollback on error (see ShoppingListComponent)
+   - Undo-delete pattern: defer API call until toast timeout expires
 
    **TypeScript**
    - Strict mode compliance

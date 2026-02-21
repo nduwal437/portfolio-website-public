@@ -119,6 +119,85 @@ describe('ShoppingListComponent', () => {
 
       expect(component.receivedItems).toEqual([{ id: 2, name: 'Bread', is_needed: false }]);
     });
+
+    it('should filter items by search term', () => {
+      component.shoppingItems = mockItems;
+      component.searchTerm = 'milk';
+      component.separateItems();
+
+      expect(component.requiredItems.length).toBe(1);
+      expect(component.requiredItems[0].name).toBe('Milk');
+      expect(component.receivedItems.length).toBe(0);
+    });
+
+    it('should be case-insensitive when filtering by search term', () => {
+      component.shoppingItems = mockItems;
+      component.searchTerm = 'BREAD';
+      component.separateItems();
+
+      expect(component.receivedItems.length).toBe(1);
+      expect(component.receivedItems[0].name).toBe('Bread');
+    });
+
+    it('should return all items when search term is empty', () => {
+      component.shoppingItems = mockItems;
+      component.searchTerm = '';
+      component.separateItems();
+
+      expect(component.requiredItems.length).toBe(2);
+      expect(component.receivedItems.length).toBe(1);
+    });
+
+    it('should return all items when search term is whitespace only', () => {
+      component.shoppingItems = mockItems;
+      component.searchTerm = '   ';
+      component.separateItems();
+
+      expect(component.requiredItems.length).toBe(2);
+      expect(component.receivedItems.length).toBe(1);
+    });
+
+    it('should return no items when search term matches nothing', () => {
+      component.shoppingItems = mockItems;
+      component.searchTerm = 'xyz';
+      component.separateItems();
+
+      expect(component.requiredItems.length).toBe(0);
+      expect(component.receivedItems.length).toBe(0);
+    });
+
+    it('should match partial names', () => {
+      component.shoppingItems = mockItems;
+      component.searchTerm = 'gg';
+      component.separateItems();
+
+      expect(component.requiredItems.length).toBe(1);
+      expect(component.requiredItems[0].name).toBe('Eggs');
+    });
+  });
+
+  describe('search functionality', () => {
+    it('should re-separate items on search change', () => {
+      component.shoppingItems = mockItems;
+      component.searchTerm = 'Milk';
+
+      component.onSearchChange();
+
+      expect(component.requiredItems.length).toBe(1);
+      expect(component.requiredItems[0].name).toBe('Milk');
+    });
+
+    it('should clear search term and show all items', () => {
+      component.shoppingItems = mockItems;
+      component.searchTerm = 'Milk';
+      component.separateItems();
+
+      component.clearSearch();
+
+      expect(component.searchTerm).toBe('');
+      expect(component.requiredItems.length).toBe(2);
+      expect(component.receivedItems.length).toBe(1);
+    });
   });
 
   describe('addItem', () => {

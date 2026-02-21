@@ -162,4 +162,101 @@ describe('AuthService', () => {
       service['isLoggedInSubject'].next(true);
     });
   });
+
+  describe('isSessionValid', () => {
+    it('should return false when no token exists', () => {
+      localStorage.removeItem('authToken');
+
+      expect(service.isSessionValid()).toBeFalse();
+    });
+
+    it('should return true when token exists with no lastActivity', () => {
+      localStorage.setItem('authToken', 'test-token');
+      localStorage.removeItem('lastActivity');
+
+      expect(service.isSessionValid()).toBeTrue();
+    });
+
+    it('should return true when last activity is within timeout', () => {
+      localStorage.setItem('authToken', 'test-token');
+      localStorage.setItem('lastActivity', Date.now().toString());
+
+      expect(service.isSessionValid()).toBeTrue();
+    });
+
+    it('should return false when last activity exceeds timeout', () => {
+      localStorage.setItem('authToken', 'test-token');
+      const expired = Date.now() - 61 * 60 * 1000; // 61 minutes ago
+      localStorage.setItem('lastActivity', expired.toString());
+
+      expect(service.isSessionValid()).toBeFalse();
+    });
+
+    it('should return false when lastActivity is not a valid number', () => {
+      localStorage.setItem('authToken', 'test-token');
+      localStorage.setItem('lastActivity', 'invalid');
+
+      expect(service.isSessionValid()).toBeFalse();
+    });
+  });
+
+  describe('updateActivity', () => {
+    it('should update lastActivity timestamp in localStorage', () => {
+      localStorage.setItem('authToken', 'test-token');
+      localStorage.removeItem('lastActivity');
+
+      service.updateActivity();
+
+      expect(localStorage.getItem('lastActivity')).not.toBeNull();
+      const storedTime = parseInt(localStorage.getItem('lastActivity')!, 10);
+      expect(Date.now() - storedTime).toBeLessThan(1000);
+    });
+
+    it('should not update lastActivity when no token exists', () => {
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('lastActivity');
+
+      service.updateActivity();
+
+      expect(localStorage.getItem('lastActivity')).toBeNull();
+    });
+  });
+
+  describe('ngOnDestroy', () => {
+    it('should clean up without errors', () => {
+      expect(() => service.ngOnDestroy()).not.toThrow();
+    });
+
+    it('should clear inactivity timer', () => {
+      const spy = spyOn(window, 'clearTimeout').and.callThrough();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const timer = ((service as any).inactivityTimer = setTimeout(() => {}, 100000));
+
+      service.ngOnDestroy();
+
+      expect(spy).toHaveBeenCalledWith(timer);
+    });
+  });
+
+  describe('logout (extended)', () => {
+    it('should clear lastActivity from localStorage', () => {
+      localStorage.setItem('authToken', 'test-token');
+      localStorage.setItem('lastActivity', Date.now().toString());
+
+      service.logout();
+
+      expect(localStorage.getItem('lastActivity')).toBeNull();
+    });
+
+    it('should clear inactivity timer on logout', () => {
+      localStorage.setItem('authToken', 'test-token');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (service as any).inactivityTimer = setTimeout(() => {}, 100000);
+
+      service.logout();
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((service as any).inactivityTimer).toBeUndefined();
+    });
+  });
 });

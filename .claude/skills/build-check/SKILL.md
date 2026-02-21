@@ -42,7 +42,7 @@ Verify the production build for GitHub Pages deployment.
    - Lint issues (if any)
 
 ## Project Context
-- Deployment: GitHub Pages via `peaceiris/actions-gh-pages@v3`
+- Deployment: GitHub Pages served from `docs/` on main branch. CI builds and commits `docs/` directly.
 - Build output: `docs/` directory
 - Custom domain: www.nikeshduwal.com.np (CNAME in `src/assets/`)
-- CI pipeline: `.github/workflows/ci.yml`
+- CI pipeline: `.github/workflows/ci.yml` (lint → build → test → deploy via commit to main)

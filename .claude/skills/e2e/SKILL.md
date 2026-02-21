@@ -38,5 +38,5 @@ Run Playwright E2E tests and analyze results.
 ## Project Context
 - E2E tests live in `e2e/portfolio.spec.ts`
 - Config: `playwright.config.ts` (auto-starts `npm start`)
-- Test suites: Navigation, Contact Form, Authentication, Responsive Design, Accessibility
+- Test suites: Portfolio Website Navigation, Contact Form, Authentication Flow (login page, protected routes, form validation, error messages), Responsive Design (mobile/tablet/desktop), Accessibility (ARIA, keyboard nav, heading structure)
 - Base URL: http://localhost:4200

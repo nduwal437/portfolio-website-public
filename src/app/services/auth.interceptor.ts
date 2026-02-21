@@ -21,7 +21,7 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(authReq).pipe(
         tap(event => {
           // Update activity on successful API responses
-          if (event instanceof HttpResponse && event.status === 200) {
+          if (event instanceof HttpResponse && event.ok) {
             this.authService.updateActivity();
           }
         })

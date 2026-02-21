@@ -109,6 +109,24 @@ test.describe('Authentication Flow', () => {
     await page.goto('/shopping-list');
     await expect(page).not.toHaveURL(/\/shopping-list/);
   });
+
+  test('should display login form with email and password fields', async ({ page }) => {
+    await page.goto('/login');
+    await expect(page.locator('h2')).toHaveText('Login');
+    await expect(page.locator('#email')).toBeVisible();
+    await expect(page.locator('#password')).toBeVisible();
+    await expect(page.locator('.login-button')).toBeVisible();
+  });
+
+  test('should show error message on failed login attempt', async ({ page }) => {
+    await page.goto('/login');
+
+    await page.locator('#email').fill('invalid@example.com');
+    await page.locator('#password').fill('wrongpassword');
+    await page.locator('.login-button').click();
+
+    await expect(page.locator('.error-message')).toBeVisible({ timeout: 10000 });
+  });
 });
 
 test.describe('Responsive Design', () => {

@@ -108,7 +108,9 @@ export class AuthService implements OnDestroy {
     if (!token) return false;
 
     if (lastActivity) {
-      const timeSinceLastActivity = Date.now() - parseInt(lastActivity, 10);
+      const lastActivityTime = parseInt(lastActivity, 10);
+      if (Number.isNaN(lastActivityTime)) return false;
+      const timeSinceLastActivity = Date.now() - lastActivityTime;
       return timeSinceLastActivity <= this.INACTIVITY_TIMEOUT;
     }
 

@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 export interface ShoppingItem {
   id: number;
   name: string;
-  is_needed?: boolean;
+  is_needed: boolean;
   created_at?: string;
   updated_at?: string;
 }

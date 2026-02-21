@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build:gh-pages": "ng build --configuration production --base-href / --output-path docs",
-    "deploy:gh-pages": "npm run build:gh-pages && cp docs/index.html docs/404.html",
+    "deploy:gh-pages": "cp docs/CNAME /tmp/CNAME_BACKUP 2>/dev/null; rm -rf docs/*; npm run build:gh-pages && cp docs/index.html docs/404.html && cp /tmp/CNAME_BACKUP docs/CNAME 2>/dev/null; true",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",

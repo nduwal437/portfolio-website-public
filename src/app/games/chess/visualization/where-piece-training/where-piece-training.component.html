@@ -1,8 +1,8 @@
 <div class="page-container">
   <div class="page-header">
-    <a routerLink="/games/chess/blindfold/move-sequence" class="breadcrumb-link">&larr; Move-Sequence Memory</a>
-    <h1>What's on the Square?</h1>
-    <p>Read the moves, then identify what occupies a target square.</p>
+    <a routerLink="/games/chess/visualization/move-sequence" class="breadcrumb-link">&larr; Move-Sequence Memory</a>
+    <h1>Where is the Piece?</h1>
+    <p>Read the moves, then locate the named piece on the board.</p>
   </div>
 
   <div class="drill-card">
@@ -15,11 +15,11 @@
     <div class="moves-list" *ngIf="!movesRevealed" style="font-style: italic; color: #999">moves hidden</div>
 
     <div class="text-prompt">
-      What is on <span class="mono">{{ targetSquare }}</span
+      Where is the <span class="mono">{{ pieceLabel }}</span
       >?
     </div>
 
-    <div class="option-grid">
+    <div class="option-grid option-grid-4col">
       <button
         type="button"
         class="option-btn"

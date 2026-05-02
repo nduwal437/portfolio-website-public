@@ -8,19 +8,20 @@ import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { GamesComponent } from './games/games.component';
+import { TicTacToeComponent } from './games/tic-tac-toe/tic-tac-toe.component';
 import { ChessComponent } from './games/chess/chess.component';
-import { BlindfoldComponent } from './games/chess/blindfold/blindfold.component';
-import { CategoryComponent } from './games/chess/blindfold/category/category.component';
-import { ColorTrainingComponent } from './games/chess/blindfold/color-training/color-training.component';
-import { DiagonalTrainingComponent } from './games/chess/blindfold/diagonal-training/diagonal-training.component';
-import { SameColorTrainingComponent } from './games/chess/blindfold/same-color-training/same-color-training.component';
-import { KingDistanceTrainingComponent } from './games/chess/blindfold/king-distance-training/king-distance-training.component';
-import { PieceSightTrainingComponent } from './games/chess/blindfold/piece-sight-training/piece-sight-training.component';
-import { KnightMoveTrainingComponent } from './games/chess/blindfold/knight-move-training/knight-move-training.component';
-import { ForkSquareTrainingComponent } from './games/chess/blindfold/fork-square-training/fork-square-training.component';
-import { AttackerPickTrainingComponent } from './games/chess/blindfold/attacker-pick-training/attacker-pick-training.component';
-import { WhatsOnSquareTrainingComponent } from './games/chess/blindfold/whats-on-square-training/whats-on-square-training.component';
-import { WherePieceTrainingComponent } from './games/chess/blindfold/where-piece-training/where-piece-training.component';
+import { VisualizationComponent } from './games/chess/visualization/visualization.component';
+import { CategoryComponent } from './games/chess/visualization/category/category.component';
+import { ColorTrainingComponent } from './games/chess/visualization/color-training/color-training.component';
+import { DiagonalTrainingComponent } from './games/chess/visualization/diagonal-training/diagonal-training.component';
+import { SameColorTrainingComponent } from './games/chess/visualization/same-color-training/same-color-training.component';
+import { KingDistanceTrainingComponent } from './games/chess/visualization/king-distance-training/king-distance-training.component';
+import { PieceSightTrainingComponent } from './games/chess/visualization/piece-sight-training/piece-sight-training.component';
+import { KnightMoveTrainingComponent } from './games/chess/visualization/knight-move-training/knight-move-training.component';
+import { ForkSquareTrainingComponent } from './games/chess/visualization/fork-square-training/fork-square-training.component';
+import { AttackerPickTrainingComponent } from './games/chess/visualization/attacker-pick-training/attacker-pick-training.component';
+import { WhatsOnSquareTrainingComponent } from './games/chess/visualization/whats-on-square-training/whats-on-square-training.component';
+import { WherePieceTrainingComponent } from './games/chess/visualization/where-piece-training/where-piece-training.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const boardGeometryCategory = {
@@ -30,25 +31,25 @@ const boardGeometryCategory = {
     {
       title: 'Color Training',
       description: 'A square is named — answer whether it is light or dark.',
-      link: '/games/chess/blindfold/board-geometry/color',
+      link: '/games/chess/visualization/board-geometry/color',
       available: true
     },
     {
       title: 'Diagonal Naming',
       description: 'Pick which of four squares lies on a diagonal from the prompt.',
-      link: '/games/chess/blindfold/board-geometry/diagonal',
+      link: '/games/chess/visualization/board-geometry/diagonal',
       available: true
     },
     {
       title: 'Same-Color Pair',
       description: 'Two squares — decide if they share the same color.',
-      link: '/games/chess/blindfold/board-geometry/same-color',
+      link: '/games/chess/visualization/board-geometry/same-color',
       available: true
     },
     {
       title: 'King Distance',
       description: 'How many king moves separate two squares?',
-      link: '/games/chess/blindfold/board-geometry/king-distance',
+      link: '/games/chess/visualization/board-geometry/king-distance',
       available: true
     }
   ]
@@ -61,13 +62,13 @@ const singlePieceCategory = {
     {
       title: 'Piece Sight',
       description: 'Pick the square attacked by the named piece.',
-      link: '/games/chess/blindfold/single-piece/piece-sight',
+      link: '/games/chess/visualization/single-piece/piece-sight',
       available: true
     },
     {
       title: 'Knight Move',
       description: 'Which of four squares is one knight hop away?',
-      link: '/games/chess/blindfold/single-piece/knight-move',
+      link: '/games/chess/visualization/single-piece/knight-move',
       available: true
     }
   ]
@@ -80,13 +81,13 @@ const twoPieceCategory = {
     {
       title: 'Fork Square',
       description: 'Where can a knight land to fork both targets?',
-      link: '/games/chess/blindfold/two-piece/fork',
+      link: '/games/chess/visualization/two-piece/fork',
       available: true
     },
     {
       title: 'Attacker Pick',
       description: 'Which piece-on-square attacks the target?',
-      link: '/games/chess/blindfold/two-piece/attacker',
+      link: '/games/chess/visualization/two-piece/attacker',
       available: true
     }
   ]
@@ -99,13 +100,13 @@ const moveSequenceCategory = {
     {
       title: "What's on the Square?",
       description: 'After the moves, identify what occupies a target square.',
-      link: '/games/chess/blindfold/move-sequence/whats-on-square',
+      link: '/games/chess/visualization/move-sequence/whats-on-square',
       available: true
     },
     {
       title: 'Where is the Piece?',
       description: 'After the moves, locate a named piece on the board.',
-      link: '/games/chess/blindfold/move-sequence/where-piece',
+      link: '/games/chess/visualization/move-sequence/where-piece',
       available: true
     }
   ]
@@ -124,34 +125,35 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'games', component: GamesComponent },
+  { path: 'games/tic-tac-toe', component: TicTacToeComponent },
   { path: 'games/chess', component: ChessComponent },
-  { path: 'games/chess/blindfold', component: BlindfoldComponent },
+  { path: 'games/chess/visualization', component: VisualizationComponent },
 
   {
-    path: 'games/chess/blindfold/board-geometry',
+    path: 'games/chess/visualization/board-geometry',
     component: CategoryComponent,
     data: { category: boardGeometryCategory }
   },
-  { path: 'games/chess/blindfold/board-geometry/color', component: ColorTrainingComponent },
-  { path: 'games/chess/blindfold/board-geometry/diagonal', component: DiagonalTrainingComponent },
-  { path: 'games/chess/blindfold/board-geometry/same-color', component: SameColorTrainingComponent },
-  { path: 'games/chess/blindfold/board-geometry/king-distance', component: KingDistanceTrainingComponent },
+  { path: 'games/chess/visualization/board-geometry/color', component: ColorTrainingComponent },
+  { path: 'games/chess/visualization/board-geometry/diagonal', component: DiagonalTrainingComponent },
+  { path: 'games/chess/visualization/board-geometry/same-color', component: SameColorTrainingComponent },
+  { path: 'games/chess/visualization/board-geometry/king-distance', component: KingDistanceTrainingComponent },
 
-  { path: 'games/chess/blindfold/single-piece', component: CategoryComponent, data: { category: singlePieceCategory } },
-  { path: 'games/chess/blindfold/single-piece/piece-sight', component: PieceSightTrainingComponent },
-  { path: 'games/chess/blindfold/single-piece/knight-move', component: KnightMoveTrainingComponent },
+  { path: 'games/chess/visualization/single-piece', component: CategoryComponent, data: { category: singlePieceCategory } },
+  { path: 'games/chess/visualization/single-piece/piece-sight', component: PieceSightTrainingComponent },
+  { path: 'games/chess/visualization/single-piece/knight-move', component: KnightMoveTrainingComponent },
 
-  { path: 'games/chess/blindfold/two-piece', component: CategoryComponent, data: { category: twoPieceCategory } },
-  { path: 'games/chess/blindfold/two-piece/fork', component: ForkSquareTrainingComponent },
-  { path: 'games/chess/blindfold/two-piece/attacker', component: AttackerPickTrainingComponent },
+  { path: 'games/chess/visualization/two-piece', component: CategoryComponent, data: { category: twoPieceCategory } },
+  { path: 'games/chess/visualization/two-piece/fork', component: ForkSquareTrainingComponent },
+  { path: 'games/chess/visualization/two-piece/attacker', component: AttackerPickTrainingComponent },
 
   {
-    path: 'games/chess/blindfold/move-sequence',
+    path: 'games/chess/visualization/move-sequence',
     component: CategoryComponent,
     data: { category: moveSequenceCategory }
   },
-  { path: 'games/chess/blindfold/move-sequence/whats-on-square', component: WhatsOnSquareTrainingComponent },
-  { path: 'games/chess/blindfold/move-sequence/where-piece', component: WherePieceTrainingComponent },
+  { path: 'games/chess/visualization/move-sequence/whats-on-square', component: WhatsOnSquareTrainingComponent },
+  { path: 'games/chess/visualization/move-sequence/where-piece', component: WherePieceTrainingComponent },
 
   { path: '**', redirectTo: '' } // Wildcard route - must be last
 ];

@@ -1,8 +1,8 @@
 <div class="page-container">
   <div class="page-header">
-    <a routerLink="/games/chess/blindfold/board-geometry" class="breadcrumb-link">&larr; Board Geometry</a>
-    <h1>Color Training</h1>
-    <p>Is the square light or dark?</p>
+    <a routerLink="/games/chess/visualization/board-geometry" class="breadcrumb-link">&larr; Board Geometry</a>
+    <h1>Diagonal Naming</h1>
+    <p>Which square lies on a diagonal from the prompt square?</p>
   </div>
 
   <div class="drill-card">
@@ -11,16 +11,20 @@
       <span class="score-accuracy" *ngIf="totalCount > 0">({{ accuracy }}%)</span>
     </div>
 
-    <div class="square-prompt" aria-label="Square to identify">
+    <div class="square-prompt" aria-label="Prompt square">
       {{ square }}
     </div>
 
-    <div class="answer-buttons">
-      <button type="button" class="answer-btn answer-light" (click)="answer('light')" [disabled]="!awaitingAnswer">
-        Light
-      </button>
-      <button type="button" class="answer-btn answer-dark" (click)="answer('dark')" [disabled]="!awaitingAnswer">
-        Dark
+    <div class="option-grid">
+      <button
+        type="button"
+        class="option-btn"
+        *ngFor="let option of options; trackBy: trackByOption"
+        [ngClass]="optionClass(option)"
+        (click)="answer(option)"
+        [disabled]="!awaitingAnswer"
+      >
+        {{ option }}
       </button>
     </div>
 
@@ -35,7 +39,7 @@
     </div>
 
     <div class="actions">
-      <button type="button" class="next-btn" (click)="nextSquare()" [disabled]="awaitingAnswer">Next square</button>
+      <button type="button" class="next-btn" (click)="nextRound()" [disabled]="awaitingAnswer">Next square</button>
       <button type="button" class="reset-btn" (click)="reset()">Reset score</button>
     </div>
   </div>

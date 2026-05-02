@@ -15,9 +15,9 @@ interface ChessModeTile {
 export class ChessComponent {
   readonly modes: ChessModeTile[] = [
     {
-      title: 'Blindfold Training',
+      title: 'Visualization Training',
       description: 'Train your ability to visualize the board without seeing the pieces.',
-      link: '/games/chess/blindfold',
+      link: '/games/chess/visualization',
       available: true
     }
   ];

@@ -1,8 +1,8 @@
 <div class="page-container">
   <div class="page-header">
-    <a routerLink="/games/chess/blindfold/board-geometry" class="breadcrumb-link">&larr; Board Geometry</a>
-    <h1>Same-Color Pair</h1>
-    <p>Are these two squares the same color, or different?</p>
+    <a routerLink="/games/chess/visualization/board-geometry" class="breadcrumb-link">&larr; Board Geometry</a>
+    <h1>King Distance</h1>
+    <p>How many king moves separate these two squares?</p>
   </div>
 
   <div class="drill-card">
@@ -13,21 +13,20 @@
 
     <div class="square-prompt" aria-label="Square pair">
       <span>{{ squareA }}</span>
-      <span class="prompt-sep">·</span>
+      <span class="prompt-sep">&rarr;</span>
       <span>{{ squareB }}</span>
     </div>
 
-    <div class="answer-buttons">
-      <button type="button" class="answer-btn answer-same" (click)="answer('same')" [disabled]="!awaitingAnswer">
-        Same
-      </button>
+    <div class="option-grid">
       <button
         type="button"
-        class="answer-btn answer-different"
-        (click)="answer('different')"
+        class="option-btn"
+        *ngFor="let option of options; trackBy: trackByOption"
+        [ngClass]="optionClass(option)"
+        (click)="answer(option)"
         [disabled]="!awaitingAnswer"
       >
-        Different
+        {{ option }}
       </button>
     </div>
 

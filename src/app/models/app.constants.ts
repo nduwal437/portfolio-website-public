@@ -10,6 +10,6 @@ export const APP_ROUTES = {
   shoppingList: 'shopping-list',
   games: 'games',
   chess: 'games/chess',
-  blindfold: 'games/chess/blindfold',
-  colorTraining: 'games/chess/blindfold/color'
+  visualization: 'games/chess/visualization',
+  colorTraining: 'games/chess/visualization/color'
 } as const;

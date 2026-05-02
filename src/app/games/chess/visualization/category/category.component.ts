@@ -17,7 +17,7 @@ interface CategoryData {
 }
 
 @Component({
-  selector: 'app-blindfold-category',
+  selector: 'app-visualization-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css']
 })

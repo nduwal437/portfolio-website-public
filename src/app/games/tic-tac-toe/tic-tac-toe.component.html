@@ -1,0 +1,59 @@
+<div class="page-container">
+  <div class="page-header">
+    <a routerLink="/games" class="breadcrumb-link">&larr; Games</a>
+    <h1>Tic Tac Toe</h1>
+    <p *ngIf="!mode">Choose a mode to start.</p>
+  </div>
+
+  <div class="mode-select" *ngIf="!mode">
+    <button type="button" class="mode-btn" (click)="selectMode('one-player')">
+      <span class="mode-title">1 Player</span>
+      <span class="mode-sub">Play against the machine</span>
+    </button>
+    <button type="button" class="mode-btn" (click)="selectMode('two-player')">
+      <span class="mode-title">2 Players</span>
+      <span class="mode-sub">Take turns on the same device</span>
+    </button>
+  </div>
+
+  <div class="game-card" *ngIf="mode">
+    <div class="score" aria-live="polite">
+      <span class="score-item">
+        <span class="score-label">{{ mode === 'one-player' ? 'You (X)' : 'X' }}</span>
+        <span class="score-value">{{ xWins }}</span>
+      </span>
+      <span class="score-item">
+        <span class="score-label">Draws</span>
+        <span class="score-value">{{ draws }}</span>
+      </span>
+      <span class="score-item">
+        <span class="score-label">{{ mode === 'one-player' ? 'Machine (O)' : 'O' }}</span>
+        <span class="score-value">{{ oWins }}</span>
+      </span>
+    </div>
+
+    <div class="status" role="status" aria-live="polite">{{ statusMessage }}</div>
+
+    <div class="board" role="grid" aria-label="Tic Tac Toe board">
+      <button
+        *ngFor="let cell of board; let i = index; trackBy: trackByIndex"
+        type="button"
+        class="cell"
+        [class.cell-x]="cell === 'X'"
+        [class.cell-o]="cell === 'O'"
+        [class.cell-win]="winningLine && winningLine.includes(i)"
+        [disabled]="cell !== '' || winner || isDraw || machineThinking"
+        [attr.aria-label]="'Cell ' + (i + 1) + (cell ? ', ' + cell : ', empty')"
+        (click)="play(i)"
+      >
+        {{ cell }}
+      </button>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="primary-btn" (click)="newGame()">New game</button>
+      <button type="button" class="secondary-btn" (click)="resetScore()">Reset score</button>
+      <button type="button" class="secondary-btn" (click)="changeMode()">Change mode</button>
+    </div>
+  </div>
+</div>

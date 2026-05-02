@@ -19,6 +19,12 @@ export class GamesComponent {
       description: 'Sharpen your chess intuition with focused training drills.',
       link: '/games/chess',
       available: true
+    },
+    {
+      title: 'Tic Tac Toe',
+      description: 'Classic 3-in-a-row. Play against the machine or a friend.',
+      link: '/games/tic-tac-toe',
+      available: true
     }
   ];
 

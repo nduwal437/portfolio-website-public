@@ -1,0 +1,46 @@
+<div class="page-container">
+  <div class="page-header">
+    <a routerLink="/games/chess/blindfold/two-piece" class="breadcrumb-link">&larr; Two-Piece Interactions</a>
+    <h1>Attacker Pick</h1>
+    <p>Which piece-on-square attacks the target?</p>
+  </div>
+
+  <div class="drill-card">
+    <div class="score" aria-live="polite">
+      <span class="score-value">{{ correctCount }} / {{ totalCount }}</span>
+      <span class="score-accuracy" *ngIf="totalCount > 0">({{ accuracy }}%)</span>
+    </div>
+
+    <div class="text-prompt" aria-label="Target square">
+      Target: <span class="mono">{{ target }}</span>
+    </div>
+
+    <div class="option-grid">
+      <button
+        type="button"
+        class="option-btn"
+        *ngFor="let option of options; let i = index; trackBy: trackByIndex"
+        [ngClass]="optionClass(i)"
+        (click)="answer(i)"
+        [disabled]="!awaitingAnswer"
+      >
+        {{ option.label }}
+      </button>
+    </div>
+
+    <div
+      class="feedback"
+      *ngIf="feedback"
+      [class.feedback-correct]="feedback.correct"
+      [class.feedback-wrong]="!feedback.correct"
+      role="status"
+    >
+      {{ feedback.message }}
+    </div>
+
+    <div class="actions">
+      <button type="button" class="next-btn" (click)="nextRound()" [disabled]="awaitingAnswer">Next</button>
+      <button type="button" class="reset-btn" (click)="reset()">Reset score</button>
+    </div>
+  </div>
+</div>

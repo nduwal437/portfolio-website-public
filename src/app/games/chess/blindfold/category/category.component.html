@@ -1,0 +1,21 @@
+<div class="page-container">
+  <div class="page-header">
+    <a routerLink="/games/chess/blindfold" class="breadcrumb-link">&larr; Blindfold Training</a>
+    <h1>{{ title }}</h1>
+    <p>{{ subtitle }}</p>
+  </div>
+
+  <div class="tile-grid">
+    <a
+      *ngFor="let drill of drills; trackBy: trackByTitle"
+      [routerLink]="drill.link"
+      class="tile"
+      [class.tile-disabled]="!drill.available"
+    >
+      <h3>{{ drill.title }}</h3>
+      <p>{{ drill.description }}</p>
+      <span class="tile-cta" *ngIf="drill.available">Start &rarr;</span>
+      <span class="tile-cta tile-cta-muted" *ngIf="!drill.available">Coming soon</span>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="page-container">
+  <div class="page-header">
+    <a routerLink="/games/chess/blindfold/move-sequence" class="breadcrumb-link">&larr; Move-Sequence Memory</a>
+    <h1>Where is the Piece?</h1>
+    <p>Read the moves, then locate the named piece on the board.</p>
+  </div>
+
+  <div class="drill-card">
+    <div class="score" aria-live="polite">
+      <span class="score-value">{{ correctCount }} / {{ totalCount }}</span>
+      <span class="score-accuracy" *ngIf="totalCount > 0">({{ accuracy }}%)</span>
+    </div>
+
+    <div class="moves-list" *ngIf="movesRevealed">{{ sequence.moves }}</div>
+    <div class="moves-list" *ngIf="!movesRevealed" style="font-style: italic; color: #999">moves hidden</div>
+
+    <div class="text-prompt">
+      Where is the <span class="mono">{{ pieceLabel }}</span
+      >?
+    </div>
+
+    <div class="option-grid option-grid-4col">
+      <button
+        type="button"
+        class="option-btn"
+        *ngFor="let option of options; trackBy: trackByOption"
+        [ngClass]="optionClass(option)"
+        (click)="answer(option)"
+        [disabled]="!awaitingAnswer"
+      >
+        {{ option }}
+      </button>
+    </div>
+
+    <div
+      class="feedback"
+      *ngIf="feedback"
+      [class.feedback-correct]="feedback.correct"
+      [class.feedback-wrong]="!feedback.correct"
+      role="status"
+    >
+      {{ feedback.message }}
+    </div>
+
+    <div class="actions">
+      <button type="button" class="reveal-btn" (click)="hideMoves()" [disabled]="!awaitingAnswer || !movesRevealed">
+        Hide moves
+      </button>
+      <button type="button" class="next-btn" (click)="nextRound()" [disabled]="awaitingAnswer">Next</button>
+      <button type="button" class="reset-btn" (click)="reset()">Reset score</button>
+    </div>
+  </div>
+</div>

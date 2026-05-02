@@ -15,9 +15,27 @@ interface DrillTile {
 export class BlindfoldComponent {
   readonly drills: DrillTile[] = [
     {
-      title: 'Color Training',
-      description: 'A square is named — answer whether it is light or dark without looking at the board.',
-      link: '/games/chess/blindfold/color',
+      title: 'Board Geometry',
+      description: 'Color, diagonals, distance — the mental grid of files and ranks.',
+      link: '/games/chess/blindfold/board-geometry',
+      available: true
+    },
+    {
+      title: 'Single-Piece Visualization',
+      description: 'See where one piece can reach without looking at the board.',
+      link: '/games/chess/blindfold/single-piece',
+      available: true
+    },
+    {
+      title: 'Two-Piece Interactions',
+      description: 'Forks, attackers, defenders — relationships between two pieces.',
+      link: '/games/chess/blindfold/two-piece',
+      available: true
+    },
+    {
+      title: 'Move-Sequence Memory',
+      description: 'Track a short opening line in your head, then answer about the position.',
+      link: '/games/chess/blindfold/move-sequence',
       available: true
     }
   ];

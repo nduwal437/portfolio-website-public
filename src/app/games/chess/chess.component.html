@@ -1,0 +1,21 @@
+<div class="page-container">
+  <div class="page-header">
+    <a routerLink="/games" class="breadcrumb-link">&larr; Games</a>
+    <h1>Chess</h1>
+    <p>Pick a training mode to get started.</p>
+  </div>
+
+  <div class="tile-grid">
+    <a
+      *ngFor="let mode of modes; trackBy: trackByTitle"
+      [routerLink]="mode.link"
+      class="tile"
+      [class.tile-disabled]="!mode.available"
+    >
+      <h3>{{ mode.title }}</h3>
+      <p>{{ mode.description }}</p>
+      <span class="tile-cta" *ngIf="mode.available">Open &rarr;</span>
+      <span class="tile-cta tile-cta-muted" *ngIf="!mode.available">Coming soon</span>
+    </a>
+  </div>
+</div>

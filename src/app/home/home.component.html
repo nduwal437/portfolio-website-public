@@ -17,6 +17,7 @@
   <ul class="navbar-links" [class.mobile-open]="isMobileMenuOpen" role="menubar">
     <li role="none"><a routerLink="/about" (click)="closeMobileMenu()" role="menuitem">About</a></li>
     <li role="none"><a routerLink="/projects" (click)="closeMobileMenu()" role="menuitem">Projects</a></li>
+    <li role="none"><a routerLink="/games" (click)="closeMobileMenu()" role="menuitem">Games</a></li>
     <li role="none"><a routerLink="/contact" (click)="closeMobileMenu()" role="menuitem">Contact</a></li>
     <li role="none" *ngIf="isLoggedIn">
       <a routerLink="/shopping-list" class="shopping-list-btn" (click)="closeMobileMenu()" role="menuitem"

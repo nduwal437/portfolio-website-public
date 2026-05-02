@@ -1,0 +1,151 @@
+.breadcrumb-link {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #1976d2;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.breadcrumb-link:hover {
+  text-decoration: underline;
+}
+
+.drill-card {
+  max-width: 480px;
+  margin: 24px auto 0;
+  padding: 28px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  text-align: center;
+}
+
+.score {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.score-value {
+  font-weight: 600;
+  color: #333;
+}
+
+.score-accuracy {
+  margin-left: 6px;
+}
+
+.square-prompt {
+  font-size: 72px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #222;
+  margin: 16px 0 24px;
+  font-family: 'Courier New', monospace;
+}
+
+.answer-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.answer-btn {
+  flex: 1;
+  max-width: 160px;
+  padding: 16px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.1s ease, opacity 0.15s ease;
+}
+
+.answer-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.answer-btn:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.answer-light {
+  background: #f0d9b5;
+  color: #4a3825;
+  border-color: #d8be94;
+}
+
+.answer-dark {
+  background: #b58863;
+  color: #fff;
+  border-color: #8e6643;
+}
+
+.feedback {
+  margin-bottom: 18px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.feedback-correct {
+  background: #e6f4ea;
+  color: #1e7e34;
+}
+
+.feedback-wrong {
+  background: #fdecea;
+  color: #b71c1c;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.next-btn,
+.reset-btn {
+  padding: 10px 18px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.next-btn {
+  background: #1976d2;
+  color: #fff;
+  border-color: #1976d2;
+}
+
+.next-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.next-btn:not(:disabled):hover {
+  background: #1565c0;
+}
+
+.reset-btn:hover {
+  background: #f4f4f4;
+}
+
+@media screen and (max-width: 480px) {
+  .square-prompt {
+    font-size: 56px;
+  }
+
+  .answer-btn {
+    font-size: 16px;
+    padding: 14px 18px;
+  }
+}

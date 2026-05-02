@@ -13,6 +13,10 @@ import { SkillsComponent } from './skills/skills.component';
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { GamesComponent } from './games/games.component';
+import { ChessComponent } from './games/chess/chess.component';
+import { BlindfoldComponent } from './games/chess/blindfold/blindfold.component';
+import { ColorTrainingComponent } from './games/chess/blindfold/color-training/color-training.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 
 @NgModule({
@@ -24,7 +28,11 @@ import { AuthInterceptor } from './services/auth.interceptor';
     SkillsComponent,
     ContactComponent,
     LoginComponent,
-    ShoppingListComponent
+    ShoppingListComponent,
+    GamesComponent,
+    ChessComponent,
+    BlindfoldComponent,
+    ColorTrainingComponent
   ],
   imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],

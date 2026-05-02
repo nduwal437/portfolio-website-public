@@ -7,6 +7,10 @@ import { SkillsComponent } from './skills/skills.component';
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { GamesComponent } from './games/games.component';
+import { ChessComponent } from './games/chess/chess.component';
+import { BlindfoldComponent } from './games/chess/blindfold/blindfold.component';
+import { ColorTrainingComponent } from './games/chess/blindfold/color-training/color-training.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -21,6 +25,10 @@ const routes: Routes = [
     component: ShoppingListComponent,
     canActivate: [AuthGuard]
   },
+  { path: 'games', component: GamesComponent },
+  { path: 'games/chess', component: ChessComponent },
+  { path: 'games/chess/blindfold', component: BlindfoldComponent },
+  { path: 'games/chess/blindfold/color', component: ColorTrainingComponent },
   { path: '**', redirectTo: '' } // Wildcard route - must be last
 ];
 

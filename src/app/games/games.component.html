@@ -1,0 +1,20 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Games</h1>
+    <p>A small collection of games and training drills.</p>
+  </div>
+
+  <div class="tile-grid">
+    <a
+      *ngFor="let game of games; trackBy: trackByTitle"
+      [routerLink]="game.link"
+      class="tile"
+      [class.tile-disabled]="!game.available"
+    >
+      <h3>{{ game.title }}</h3>
+      <p>{{ game.description }}</p>
+      <span class="tile-cta" *ngIf="game.available">Open &rarr;</span>
+      <span class="tile-cta tile-cta-muted" *ngIf="!game.available">Coming soon</span>
+    </a>
+  </div>
+</div>

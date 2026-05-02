@@ -1,0 +1,54 @@
+<div class="page-container">
+  <div class="page-header">
+    <a routerLink="/games/chess/blindfold" class="breadcrumb-link">&larr; Blindfold Training</a>
+    <h1>Color Training</h1>
+    <p>Is the square light or dark?</p>
+  </div>
+
+  <div class="drill-card">
+    <div class="score" aria-live="polite">
+      <span class="score-value">{{ correctCount }} / {{ totalCount }}</span>
+      <span class="score-accuracy" *ngIf="totalCount > 0">({{ accuracy }}%)</span>
+    </div>
+
+    <div class="square-prompt" aria-label="Square to identify">
+      {{ square }}
+    </div>
+
+    <div class="answer-buttons">
+      <button
+        type="button"
+        class="answer-btn answer-light"
+        (click)="answer('light')"
+        [disabled]="!awaitingAnswer"
+      >
+        Light
+      </button>
+      <button
+        type="button"
+        class="answer-btn answer-dark"
+        (click)="answer('dark')"
+        [disabled]="!awaitingAnswer"
+      >
+        Dark
+      </button>
+    </div>
+
+    <div
+      class="feedback"
+      *ngIf="feedback"
+      [class.feedback-correct]="feedback.correct"
+      [class.feedback-wrong]="!feedback.correct"
+      role="status"
+    >
+      {{ feedback.message }}
+    </div>
+
+    <div class="actions">
+      <button type="button" class="next-btn" (click)="nextSquare()" [disabled]="awaitingAnswer">
+        Next square
+      </button>
+      <button type="button" class="reset-btn" (click)="reset()">Reset score</button>
+    </div>
+  </div>
+</div>

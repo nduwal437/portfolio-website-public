@@ -7,5 +7,9 @@ export const APP_ROUTES = {
   skills: 'skills',
   contact: 'contact',
   login: 'login',
-  shoppingList: 'shopping-list'
+  shoppingList: 'shopping-list',
+  games: 'games',
+  chess: 'games/chess',
+  blindfold: 'games/chess/blindfold',
+  colorTraining: 'games/chess/blindfold/color'
 } as const;

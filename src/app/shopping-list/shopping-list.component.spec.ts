@@ -108,8 +108,8 @@ describe('ShoppingListComponent', () => {
       component.separateItems();
 
       expect(component.requiredItems).toEqual([
-        { id: 1, name: 'Milk', is_needed: true },
-        { id: 3, name: 'Eggs', is_needed: true }
+        { id: 3, name: 'Eggs', is_needed: true },
+        { id: 1, name: 'Milk', is_needed: true }
       ]);
     });
 

@@ -139,7 +139,11 @@ const routes: Routes = [
   { path: 'games/chess/visualization/board-geometry/same-color', component: SameColorTrainingComponent },
   { path: 'games/chess/visualization/board-geometry/king-distance', component: KingDistanceTrainingComponent },
 
-  { path: 'games/chess/visualization/single-piece', component: CategoryComponent, data: { category: singlePieceCategory } },
+  {
+    path: 'games/chess/visualization/single-piece',
+    component: CategoryComponent,
+    data: { category: singlePieceCategory }
+  },
   { path: 'games/chess/visualization/single-piece/piece-sight', component: PieceSightTrainingComponent },
   { path: 'games/chess/visualization/single-piece/knight-move', component: KnightMoveTrainingComponent },
 

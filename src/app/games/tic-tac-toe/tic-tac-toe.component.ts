@@ -126,7 +126,7 @@ export class TicTacToeComponent {
       }
       return true;
     }
-    if (this.board.every((c) => c !== '')) {
+    if (this.board.every(c => c !== '')) {
       this.isDraw = true;
       this.draws += 1;
       return true;
@@ -168,7 +168,7 @@ export class TicTacToeComponent {
       if (winner === 'O') return 10 - depth;
       if (winner === 'X') return depth - 10;
     }
-    if (board.every((c) => c !== '')) {
+    if (board.every(c => c !== '')) {
       return 0;
     }
 

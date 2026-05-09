@@ -41,12 +41,9 @@
         class="search-input"
         (keydown.escape)="clearSearch()"
       />
-      <button
-        *ngIf="searchTerm"
-        class="search-clear-button"
-        (click)="clearSearch()"
-        aria-label="Clear search"
-      >&times;</button>
+      <button *ngIf="searchTerm" class="search-clear-button" (click)="clearSearch()" aria-label="Clear search">
+        &times;
+      </button>
     </div>
     <button
       class="sort-button"

@@ -18,6 +18,7 @@ import { SameColorTrainingComponent } from './games/chess/visualization/same-col
 import { KingDistanceTrainingComponent } from './games/chess/visualization/king-distance-training/king-distance-training.component';
 import { PieceSightTrainingComponent } from './games/chess/visualization/piece-sight-training/piece-sight-training.component';
 import { KnightMoveTrainingComponent } from './games/chess/visualization/knight-move-training/knight-move-training.component';
+import { KnightDistanceTrainingComponent } from './games/chess/visualization/knight-distance-training/knight-distance-training.component';
 import { ForkSquareTrainingComponent } from './games/chess/visualization/fork-square-training/fork-square-training.component';
 import { AttackerPickTrainingComponent } from './games/chess/visualization/attacker-pick-training/attacker-pick-training.component';
 import { WhatsOnSquareTrainingComponent } from './games/chess/visualization/whats-on-square-training/whats-on-square-training.component';
@@ -69,6 +70,12 @@ const singlePieceCategory = {
       title: 'Knight Move',
       description: 'Which of four squares is one knight hop away?',
       link: '/games/chess/visualization/single-piece/knight-move',
+      available: true
+    },
+    {
+      title: 'Knight Distance',
+      description: 'How many knight moves separate two squares?',
+      link: '/games/chess/visualization/single-piece/knight-distance',
       available: true
     }
   ]
@@ -146,6 +153,7 @@ const routes: Routes = [
   },
   { path: 'games/chess/visualization/single-piece/piece-sight', component: PieceSightTrainingComponent },
   { path: 'games/chess/visualization/single-piece/knight-move', component: KnightMoveTrainingComponent },
+  { path: 'games/chess/visualization/single-piece/knight-distance', component: KnightDistanceTrainingComponent },
 
   { path: 'games/chess/visualization/two-piece', component: CategoryComponent, data: { category: twoPieceCategory } },
   { path: 'games/chess/visualization/two-piece/fork', component: ForkSquareTrainingComponent },

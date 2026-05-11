@@ -24,6 +24,7 @@ import { SameColorTrainingComponent } from './games/chess/visualization/same-col
 import { KingDistanceTrainingComponent } from './games/chess/visualization/king-distance-training/king-distance-training.component';
 import { PieceSightTrainingComponent } from './games/chess/visualization/piece-sight-training/piece-sight-training.component';
 import { KnightMoveTrainingComponent } from './games/chess/visualization/knight-move-training/knight-move-training.component';
+import { KnightDistanceTrainingComponent } from './games/chess/visualization/knight-distance-training/knight-distance-training.component';
 import { ForkSquareTrainingComponent } from './games/chess/visualization/fork-square-training/fork-square-training.component';
 import { AttackerPickTrainingComponent } from './games/chess/visualization/attacker-pick-training/attacker-pick-training.component';
 import { WhatsOnSquareTrainingComponent } from './games/chess/visualization/whats-on-square-training/whats-on-square-training.component';
@@ -51,6 +52,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
     KingDistanceTrainingComponent,
     PieceSightTrainingComponent,
     KnightMoveTrainingComponent,
+    KnightDistanceTrainingComponent,
     ForkSquareTrainingComponent,
     AttackerPickTrainingComponent,
     WhatsOnSquareTrainingComponent,

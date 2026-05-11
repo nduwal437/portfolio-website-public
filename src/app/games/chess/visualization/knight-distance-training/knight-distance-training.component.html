@@ -1,0 +1,46 @@
+<div class="page-container">
+  <div class="page-header">
+    <a routerLink="/games/chess/visualization/single-piece" class="breadcrumb-link">&larr; Single-Piece Visualization</a>
+    <h1>Knight Distance</h1>
+    <p>How many knight moves separate these two squares?</p>
+  </div>
+
+  <div class="drill-card">
+    <div class="score" aria-live="polite">
+      <span class="score-value">{{ correctCount }} / {{ totalCount }}</span>
+      <span class="score-accuracy" *ngIf="totalCount > 0">({{ accuracy }}%)</span>
+    </div>
+
+    <div class="text-prompt" aria-label="Square pair">
+      Knight from <span class="mono">{{ squareA }}</span> to <span class="mono">{{ squareB }}</span>
+    </div>
+
+    <div class="option-grid option-grid-4col">
+      <button
+        type="button"
+        class="option-btn"
+        *ngFor="let option of options; trackBy: trackByOption"
+        [ngClass]="optionClass(option)"
+        (click)="answer(option)"
+        [disabled]="!awaitingAnswer"
+      >
+        {{ option }}
+      </button>
+    </div>
+
+    <div
+      class="feedback"
+      *ngIf="feedback"
+      [class.feedback-correct]="feedback.correct"
+      [class.feedback-wrong]="!feedback.correct"
+      role="status"
+    >
+      {{ feedback.message }}
+    </div>
+
+    <div class="actions">
+      <button type="button" class="next-btn" (click)="nextRound()" [disabled]="awaitingAnswer">Next pair</button>
+      <button type="button" class="reset-btn" (click)="reset()">Reset score</button>
+    </div>
+  </div>
+</div>

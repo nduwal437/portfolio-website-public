@@ -120,6 +120,32 @@ export function isKnightMove(from: string, to: string): boolean {
   return (df === 1 && dr === 2) || (df === 2 && dr === 1);
 }
 
+export function knightDistance(from: string, to: string): number {
+  if (from === to) {
+    return 0;
+  }
+  const visited = new Set<string>([from]);
+  let frontier: string[] = [from];
+  let depth = 0;
+  while (frontier.length) {
+    depth += 1;
+    const next: string[] = [];
+    for (const sq of frontier) {
+      for (const hop of knightMovesFrom(sq)) {
+        if (hop === to) {
+          return depth;
+        }
+        if (!visited.has(hop)) {
+          visited.add(hop);
+          next.push(hop);
+        }
+      }
+    }
+    frontier = next;
+  }
+  return -1;
+}
+
 export type PieceType = 'bishop' | 'rook' | 'queen' | 'knight' | 'king' | 'pawn';
 
 export function rookSquaresFrom(square: string): string[] {
